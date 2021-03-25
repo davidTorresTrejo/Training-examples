@@ -1,0 +1,17 @@
+p{
+    color: tomato;
+}
+
+#intro{
+    color: blueviolet;
+}
+
+.intro1{
+    color: chocolate;
+    background-color: black;
+}
+
+#intro .intro1 em{
+    background-color: coral;
+    color: cyan;
+}
