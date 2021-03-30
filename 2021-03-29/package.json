@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "tsconfig": "tsc --init"
+    "tsconfig": "tsc --init",
+    "start": "tsc --watch"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "typescript": "^4.2.3"
   }
 }
