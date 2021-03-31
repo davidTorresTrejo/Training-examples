@@ -63,7 +63,14 @@ let user: Complex = {
     }
 }
 
+let userData: Complex = user;
+
 /* Accesing to 'user' elements */
-console.log(user.name);
+console.log(userData.name);
+
+/* Union Types */
+
+let age: number | string = '27';
+let myObj: {} | null = null;
 
 

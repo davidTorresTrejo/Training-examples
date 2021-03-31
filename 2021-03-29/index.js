@@ -49,5 +49,9 @@ var user = {
         console.log(data);
     }
 };
+var userData = user;
 /* Accesing to 'user' elements */
-console.log(user.name);
+console.log(userData.name);
+/* Union Types */
+var age = '27';
+var myObj = null;
