@@ -27,7 +27,7 @@ var Person = /** @class */ (function () {
         this.age = age;
     }
     Person.prototype.printAge = function () {
-        console.log('Age:...');
+        //console.log('Age:...');
     };
     return Person;
 }());
@@ -58,7 +58,7 @@ var Person1 = /** @class */ (function () {
         },
         set: function (value) {
             if (value > 50) {
-                console.log('Please give a valid age...');
+                //console.log('Please give a valid age...');
                 return;
             }
             this._age = value;
@@ -71,7 +71,7 @@ var Person1 = /** @class */ (function () {
 var objPerson = new Person1();
 objPerson.name = 'David'; // get this value from textbox
 objPerson.age = 23; // get this value from textbox
-console.log(objPerson);
+//console.log(objPerson);
 function saveToDB(obj) {
     console.log('Saving to DB....');
 }
@@ -85,6 +85,83 @@ var Helper = /** @class */ (function () {
     Helper.PI = 3.14;
     return Helper;
 }());
-console.log('Cirlce Area : ' + Helper.calculateCircumference(23));
+//console.log('Cirlce Area : '+ Helper.calculateCircumference(23));
 //let objHelper = new Helper();
 //let resutl = objHelper.calculateCircumference(12);
+/* Abstract Class */
+var Employee = /** @class */ (function () {
+    function Employee(name, id) {
+        this.name = name;
+        this.id = id;
+    }
+    Employee.prototype.getDetails = function () {
+        return "Name: " + this.name + " and ID: " + this.id;
+    };
+    return Employee;
+}());
+var Developer = /** @class */ (function (_super) {
+    __extends(Developer, _super);
+    function Developer() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    /* Implementing method */
+    Developer.prototype.getSalary = function () {
+        return 7000;
+    };
+    return Developer;
+}(Employee));
+/* Create a new instance of Developer Class */
+var tom = new Developer('Tom', 'EMP002');
+/* Implementing IEmployee Interface */
+var Employee1 = /** @class */ (function () {
+    function Employee1(name, id, age) {
+        this.name = name;
+        this.id = id;
+        this.age = age;
+    }
+    Employee1.prototype.getDetails = function () {
+        return "Name: " + this.name + " with Id: " + this.id + " and Age: " + this.age;
+    };
+    return Employee1;
+}());
+// Create a new instance of Empleoye1 that implements IEmployee Interface
+var employee = new Employee1('David', '1', 23);
+/* Implementing IEncryptor Interface to SymetricEncryption Class */
+var SymetricEncryption = /** @class */ (function () {
+    function SymetricEncryption(data) {
+        this.encryptData = '';
+        this.decryptData = '';
+        this.data = data;
+    }
+    SymetricEncryption.prototype.doEncryptData = function (data) {
+        // create symetric encryption algorithm 
+        return this.encryptData;
+    };
+    SymetricEncryption.prototype.doDecryptData = function (encryptData) {
+        // create symetric decryption algorithm 
+        return this.decryptData;
+    };
+    return SymetricEncryption;
+}());
+/* Implementing IEncryptor Interface to AsymetricEncryption Class */
+var AsymetricDecryption = /** @class */ (function () {
+    function AsymetricDecryption(data) {
+        this.encryptData = '';
+        this.decryptData = '';
+        this.data = data;
+    }
+    AsymetricDecryption.prototype.doEncryptData = function (data) {
+        // create symetric encryption algorithm 
+        return this.encryptData;
+    };
+    AsymetricDecryption.prototype.doDecryptData = function (encryptData) {
+        // create symetric decryption algorithm 
+        return this.decryptData;
+    };
+    return AsymetricDecryption;
+}());
+/* Usage */
+var syn = new SymetricEncryption('Hello');
+syn.doEncryptData(syn.data);
+var asyn = new AsymetricDecryption('Hello');
+asyn.doEncryptData(asyn.data);
