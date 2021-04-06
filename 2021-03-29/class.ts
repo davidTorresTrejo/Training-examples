@@ -223,4 +223,84 @@ syn.doEncryptData(syn.data);
 let asyn = new AsymetricDecryption('Hello');
 asyn.doEncryptData(asyn.data);
 
+/* Encryption Cluster */
+
+interface IEncryption{
+    encrypt(data: string): string;
+    decrypt(data: string): string;
+}
+
+class SymetricEncryptionExample implements IEncryption{
+    encrypt(data: string): string{
+        return `xyz${data}`;
+    }
+
+    decrypt(data: string): string{
+        return data.slice(3);
+    }
+}
+
+class AsymetricEncryptionExample implements IEncryption{
+    encrypt(data: string): string{
+        return `abc${data}`;
+    }
+
+    decrypt(data: string): string{
+        return data.slice(3);
+    }
+}
+
+class CrazyEncryption implements IEncryption{
+    encrypt(data: string): string{
+        return `---${data}`;
+    }
+
+    decrypt(data: string): string{
+        return data.slice(3);
+    }
+}
+
+/* Persistance Cluster */
+
+class Oracle{
+    _encObj: IEncryption;
+
+    constructor(encObj: IEncryption){
+        this._encObj = encObj;
+    }
+
+    save(data: string): void{
+        //encrypt
+        let encryptedData = this._encObj.encrypt(data);
+        //save encryptedData to DB
+        console.log('Oracle Data... ', encryptedData);
+    }
+}
+
+/* Use Oracle Class to save Data */
+// TODO: Read a config file and get what encryption is used
+// Choose one Symetric, Asymetric, Crazy)
+let dbObj = new Oracle(new SymetricEncryptionExample());
+dbObj.save('David');
+
+// You can choose one class to implement encrypt that you prefer
+
+/* Interface in functions */
+
+interface IPerson{
+    name: string,
+    age: number
+}
+
+function greet(data: IPerson){
+    console.log(`Hello ${data.name}, your age is ${data.age}`);
+}
+
+// Usage
+let person = {
+    name: 'Steve',
+    age: 23
+}
+
+greet(person);
 

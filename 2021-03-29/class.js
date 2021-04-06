@@ -165,3 +165,63 @@ var syn = new SymetricEncryption('Hello');
 syn.doEncryptData(syn.data);
 var asyn = new AsymetricDecryption('Hello');
 asyn.doEncryptData(asyn.data);
+var SymetricEncryptionExample = /** @class */ (function () {
+    function SymetricEncryptionExample() {
+    }
+    SymetricEncryptionExample.prototype.encrypt = function (data) {
+        return "xyz" + data;
+    };
+    SymetricEncryptionExample.prototype.decrypt = function (data) {
+        return data.slice(3);
+    };
+    return SymetricEncryptionExample;
+}());
+var AsymetricEncryptionExample = /** @class */ (function () {
+    function AsymetricEncryptionExample() {
+    }
+    AsymetricEncryptionExample.prototype.encrypt = function (data) {
+        return "abc" + data;
+    };
+    AsymetricEncryptionExample.prototype.decrypt = function (data) {
+        return data.slice(3);
+    };
+    return AsymetricEncryptionExample;
+}());
+var CrazyEncryption = /** @class */ (function () {
+    function CrazyEncryption() {
+    }
+    CrazyEncryption.prototype.encrypt = function (data) {
+        return "---" + data;
+    };
+    CrazyEncryption.prototype.decrypt = function (data) {
+        return data.slice(3);
+    };
+    return CrazyEncryption;
+}());
+/* Persistance Cluster */
+var Oracle = /** @class */ (function () {
+    function Oracle(encObj) {
+        this._encObj = encObj;
+    }
+    Oracle.prototype.save = function (data) {
+        //encrypt
+        var encryptedData = this._encObj.encrypt(data);
+        //save encryptedData to DB
+        console.log('Oracle Data... ', encryptedData);
+    };
+    return Oracle;
+}());
+/* Use Oracle Class to save Data */
+// TODO: Read a config file and get what encryption is used
+// Choose one Symetric, Asymetric, Crazy)
+var dbObj = new Oracle(new SymetricEncryptionExample());
+dbObj.save('David');
+function greet(data) {
+    console.log("Hello " + data.name + ", your age is " + data.age);
+}
+// Usage
+var person = {
+    name: 'Steve',
+    age: 23
+};
+greet(person);
