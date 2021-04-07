@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>React</title>
+</head>
+<body>
+    <div id="root"></div>
+
+    <!-- Add content only whit javascript -->
+    <!-- <script type="text/javascript">
+        const rootElement = document.getElementById('root');
+        const newElement = document.createElement('div');
+        newElement.textContent = 'Hello World!';
+        newElement.classList.add('box');
+        rootElement.appendChild(newElement);
+    </script> -->
+
+    <!-- Add React -->
+    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+
+    <script type="text/javascript">
+        const rootElement = document.getElementById('root');
+        const newElement = React.createElement('div', {children: 'Hello World from React!', className: 'box'});
+        ReactDOM.render(newElement, rootElement);
+    </script>
+</body>
+</html>
