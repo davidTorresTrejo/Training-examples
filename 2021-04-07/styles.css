@@ -5,3 +5,69 @@
     width: 300px;
     padding: 20px;
 }
+
+.my-card{
+    background-color:#f1f1f1;
+    width: auto;
+    height: 300px;
+    border: 1px solid #f1f1f1;
+    box-shadow: 0 2px 2px #ccc;
+}
+
+h3{
+    font-family: 'Courier New', Courier, monospace;
+    padding-left: 50px;
+}
+
+.my-text{
+    padding-left: 50px;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: medium;
+}
+
+.text-container{
+    background-color: #282c34;
+    width: 90%;
+    height: 125px;
+    position: absolute;
+    margin-left: 50px;
+    margin-top: 0px;
+}
+
+.text-code{
+    color: white;
+    position: absolute;
+    margin-left: 25px;
+    margin-top: 25px;
+}
+
+.color-code{
+    color: #70ade9;
+}
+
+.color-parenthesis{
+    color: #7aafaa;
+}
+
+.color-quotes{
+    color: #bc9b59;
+}
+
+.button-custom{
+    background-color: #4caf50;
+    width: 100px;
+    height: 35px;
+    position: absolute;
+    margin-left: 50px;
+    margin-top: 150px;
+    border: 0px;
+    box-shadow: 0 2px 2px #4caf50 ;
+    border-radius: 5px;
+}
+
+.text-button{
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    font-size: medium;
+}
