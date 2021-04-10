@@ -6,6 +6,11 @@
     padding: 20px;
 }
 
+.App{
+    display: flex;
+    justify-content: center;
+}
+
 .my-card{
     background-color:#f1f1f1;
     width: auto;
