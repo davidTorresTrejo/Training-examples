@@ -1,3 +1,3 @@
 # Training-examples
 
-Example codes to HTML, CSS and JAVASCRIPT
+Example codes for HTML, CSS, JAVASCRIPT, TYPESCRIPT & REACT
