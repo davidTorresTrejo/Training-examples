@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
@@ -11,7 +13,7 @@
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
     "cross-env": "^7.0.3",
-    "fomantic-ui-css": "^2.8.7",
+    "fontsource-roboto": "^4.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -19,7 +21,7 @@
     "web-vitals": "^1.1.1"
   },
   "scripts": {
-    "start": "cross-env BROWSER='chrome' BROWSER_ARGS='--incognito' react-scripts start",
+    "start": "cross-env BROWSER='chrome' react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
