@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import Layout from '../../layouts/Layout'
+import LayoutHome from '../../layouts/LayoutHome'
 
-class HomePage extends React.Component{
+/* HomePage Component */
+class HomePage extends Component{
   render(){
-    const dataJSX = 'Welcome!';
     return(
-      <Layout title = "HomePage" data = {dataJSX}></Layout>
+      /* Use LayoutHome */
+      <LayoutHome>
+        <p>Home Component!</p>
+      </LayoutHome>
     );
   }
 }

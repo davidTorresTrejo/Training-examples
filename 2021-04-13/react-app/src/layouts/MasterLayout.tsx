@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-
+import MyAppBar from './MyAppBar'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,17 +22,24 @@ const MatserLayout = (props: any) => {
 
   return (    
     <div className={classes.root}>
-      <Grid container spacing={3}>
+      {/* add interactive grids  */}
+      <Grid container spacing={3} direction="column" justify="flex-end" alignItems="stretch">
         <Grid item xs={12}>
-            <p>Home | About | Contact Us</p>
+            {/* <p>Home | About | Contact Us</p> */}
+            {/* add nav bar */}
+            <MyAppBar></MyAppBar>
         </Grid>
 
         <Grid item xs={12}>
+            {/* Set LayoutHome or LayoutAdmin */}
             {props.children}
         </Grid>
 
         <Grid item xs={12}>
-            <p>Copyright 2021</p>
+            {/* Add paper elevation */}
+            <Paper variant = "outlined" square>
+              <p className = "center-p">Copyright 2021</p>
+            </Paper>
         </Grid>
 
       </Grid>
