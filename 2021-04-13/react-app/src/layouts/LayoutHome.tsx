@@ -11,6 +11,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import SendOutlinedIcon from '@material-ui/icons/SendOutlined';
 
 const drawerWidth = 240;
 
@@ -46,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     content: {
       flexGrow: 1,
-      padding: theme.spacing(3),
+      padding: theme.spacing(0, 3, 3, 3),
     },
   }),
 );
@@ -79,11 +81,23 @@ const LayoutHome = (props: Props) => {
       <List>
         <ListItem>
           <ListItemIcon> <InboxIcon></InboxIcon> </ListItemIcon>
-          <ListItemText primary = "Inbox"></ListItemText>
+          <Button>
+            <ListItemText primary = "Inbox"></ListItemText>
+          </Button>
         </ListItem>
+
         <ListItem>
-          <ListItemIcon> <MailIcon></MailIcon> </ListItemIcon>
-          <ListItemText primary = "Drafts"></ListItemText>
+        <ListItemIcon> <MailIcon></MailIcon> </ListItemIcon>
+          <Button>
+            <ListItemText primary = "Drafts"></ListItemText>
+          </Button>
+        </ListItem>
+
+        <ListItem>
+          <ListItemIcon> <SendOutlinedIcon></SendOutlinedIcon> </ListItemIcon>
+          <Button>
+            <ListItemText primary = "Sends"></ListItemText>
+          </Button>
         </ListItem>
       </List>
     </div>
@@ -125,13 +139,13 @@ const LayoutHome = (props: Props) => {
             </Drawer>
           </Hidden>
         </nav>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
+        {/* Check This  */}
+      {<main className={classes.content}>
+        {/* <div className={classes.toolbar} /> */}
         <Typography paragraph>
-            {/* Title Data */}
           {props.children}
         </Typography>
-      </main>
+      </main>}
     </div>
   );
 }
