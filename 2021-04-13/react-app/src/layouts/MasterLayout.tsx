@@ -37,9 +37,7 @@ const MatserLayout = (props: any) => {
 
         <Grid item xs={12}>
             {/* Add paper elevation */}
-            <Paper variant = "outlined" square>
-              <p className = "center-p">Copyright 2021</p>
-            </Paper>
+            <Paper elevation={0} className = {classes.paper}>Copyright 2021</Paper>
         </Grid>
 
       </Grid>

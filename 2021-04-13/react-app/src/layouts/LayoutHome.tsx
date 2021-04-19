@@ -79,25 +79,20 @@ const LayoutHome = (props: Props) => {
     <div>
       <Divider />
       <List>
-        <ListItem>
+        <ListItem button>
           <ListItemIcon> <InboxIcon></InboxIcon> </ListItemIcon>
-          <Button>
             <ListItemText primary = "Inbox"></ListItemText>
-          </Button>
         </ListItem>
 
-        <ListItem>
+        <ListItem button>
         <ListItemIcon> <MailIcon></MailIcon> </ListItemIcon>
-          <Button>
             <ListItemText primary = "Drafts"></ListItemText>
-          </Button>
         </ListItem>
 
-        <ListItem>
+        {/* Check ListItem Button */}
+        <ListItem button>
           <ListItemIcon> <SendOutlinedIcon></SendOutlinedIcon> </ListItemIcon>
-          <Button>
             <ListItemText primary = "Sends"></ListItemText>
-          </Button>
         </ListItem>
       </List>
     </div>

@@ -77,11 +77,12 @@ const LayoutAdmin = (props: Props) => {
     <div>
       <Divider />
       <List>
-        <ListItem>
+        <ListItem button>
           <ListItemIcon> <PersonIcon></PersonIcon> </ListItemIcon>
           <ListItemText primary = "Users"></ListItemText>
         </ListItem>
-        <ListItem>
+
+        <ListItem button>
           <ListItemIcon> <SettingsIcon></SettingsIcon> </ListItemIcon>
           <ListItemText primary = "Config"></ListItemText>
         </ListItem>

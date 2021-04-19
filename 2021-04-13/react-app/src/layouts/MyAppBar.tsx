@@ -4,7 +4,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
+import {RouteComponentProps,} from 'react-router-dom';
+import {withRouter} from 'react-router';
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,8 +22,19 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const MyAppBar = () => {
+/* props: RouteComponentProps */
+const MyAppBar = (props: RouteComponentProps) => {
   const classes = useStyles();
+
+
+  /* Handling onClick proparty of Buttons Home & Admin */
+  const homeButtomHandler = () =>{
+    props.history.push({pathname: '/'});
+  }
+
+  const adminButtomHandler = () =>{
+    props.history.push({pathname: '/admin'});
+  }
 
   return (
     <div className={classes.root}>
@@ -31,8 +44,8 @@ const MyAppBar = () => {
             My Aplication
           </Typography>
           {/* Routes to Home and Admin Pages in Buttons */}
-          <Button color="inherit" component={Link} to="/">Home</Button>
-          <Button color="inherit" component={Link} to="/admin">Admin</Button>
+          <Button color="inherit" onClick = {homeButtomHandler}>Home</Button>
+          <Button color="inherit" onClick = {adminButtomHandler}>Admin</Button>
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
@@ -40,6 +53,8 @@ const MyAppBar = () => {
   );
 }
 
-export default MyAppBar;
+export default withRouter(MyAppBar);
 
-/* Import whitRoute export whitRoute(MyAppBar) */
+/*  Import withRouter export withRoute(MyAppBar) 
+    onClick
+*/

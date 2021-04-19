@@ -14,10 +14,12 @@ class HomePage extends Component{
           <p>Home Component!</p>
           Call My component
         */}
-        <CardComponent title = "Send Component" content = "Component Area" titleButton = "View"></CardComponent>
+        {/* <CardComponent title = "Send Component" content = "Component Area" titleButton = "View"></CardComponent> */}
       </LayoutHome>
     );
   }
 }
 
 export default HomePage;
+
+/* Add Route  */
