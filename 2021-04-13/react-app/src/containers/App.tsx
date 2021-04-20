@@ -10,9 +10,11 @@ class App extends React.Component{
   render(){
     return(
       /* Use the BrowserRoute and Switch to choose */
+      /* Add /home path */
       <MasterLayout>
         <Switch>
           <Route path = "/" exact component = {HomePage}></Route>
+          <Route path = "/home" component = {HomePage}></Route>
           <Route path = "/admin" component = {AdminPage}></Route>
           <Route render = {() => <PageNotFound title = "Page Not Found...."/>}/>
         </Switch>
@@ -25,3 +27,4 @@ class App extends React.Component{
 export default App;
 
 /* Add switch and route */
+/* Install Axios  */
