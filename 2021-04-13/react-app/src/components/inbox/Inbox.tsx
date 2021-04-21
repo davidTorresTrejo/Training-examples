@@ -1,44 +1,83 @@
+import axios from 'axios';
 import React from 'react';
-import { Theme, withStyles, StyleRules} from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import { Typography } from '@material-ui/core';
+import MyPaper from '../../UI/MyPaper';
+import MyProgressBar from '../../UI/MyProgress';
 
-const useStyles = (theme: Theme): StyleRules => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '& > *': {
-      margin: theme.spacing(1),
-      width: theme.spacing(150),
-      height: theme.spacing(16),
-    },
-  },
-});
-
-interface IProps{
-  classes: any;
+interface IProps {
+  loading: boolean;
+  data: any;
+  error: any;
 }
 
-class Inbox extends React.Component<IProps> {
-  
-  render() {
-    return (
-      <div className = {this.props.classes.root}>
-        <Paper elevation = {1}>
-          <Typography variant = "subtitle2" gutterBottom>
-            Inbox Component 
-          </Typography>
+class Inbox extends React.Component {
 
-          <Typography variant = "body1" gutterBottom>
-            Write something........
-          </Typography>
-        </Paper>
-      </div>
-    );
+  /* Set state */
+  state = {
+    loading: true,
+    data: null,
+    error: null
+  };
+
+  render() { return <InboxView {...this.state}></InboxView> };
+
+  componentDidMount() {
+
+    axios.get('https://jsonplaceholder.typicode.com/posts')
+      .then(response => this.setState({loading: false, data: response.data, error: null}))
+      .catch(error => console.log(error))
+
+    // Fetch data from backend
+    // const res = fetch('url')
+    // then ( data => console.log(data))
+    //.catch(error => concole.log(error))
   }
 }
 
-export default withStyles(useStyles)(Inbox);
+
+/* Create a view for Inbox Class */
+class InboxView extends React.Component<IProps>{
+
+  renderLoading() {
+    const dataTSX = <MyProgressBar></MyProgressBar>
+    return dataTSX;
+  }
+
+  renderSucces() {
+    const dataTSX = this.props.data.map((item: any) => {
+      return <MyPaper 
+          key = {item.id}
+          title = {item.title} 
+          body = {item.body}
+        />  
+      })
+    return dataTSX;
+  }
+
+  renderError() {
+    const dataTSX = <h3>Error.....</h3>
+    return dataTSX;
+  }
+
+  render() {
+    if (this.props.loading) {
+      return this.renderLoading();
+    } else if (this.props.data) {
+      return this.renderSucces();
+    } else {
+      return this.renderError();
+    }
+  }
+}
+
+export default Inbox;
+
+
+
+
+/*
+  Use json place holder
+  install axios
+*/
 
 
 

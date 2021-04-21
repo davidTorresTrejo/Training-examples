@@ -6,6 +6,11 @@ import Inbox from '../../components/inbox/Inbox'
 /* HomePage Component */
 class HomePage extends Component{
 
+  list = [
+    {name: 'Inbox', path: '/home/inbox' },
+    {name: 'Starred', path: '/home/starred' }
+  ];
+
   render(){
     return(
       /* 
@@ -13,7 +18,7 @@ class HomePage extends Component{
         Add list in props, implement Rout and Switch
         Use inbox Component  
       */
-      <LayoutArea items =  {['Inbox', 'Starred']}>
+      <LayoutArea items =  {this.list} defaultSelected = {-1}>
         <Switch>
           <Route path = '/' exact render = {() => <h3>Welcome to Home!</h3>}></Route>
           <Route path = '/home/inbox' exact render = {() => <Inbox></Inbox>}></Route>

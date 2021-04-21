@@ -2,7 +2,7 @@ import React from 'react';
 import MasterLayout from '../layouts/MasterLayout';
 import HomePage from '../containers/HomePage/HomePage'
 import AdminPage from '../containers/AdminPage/AdminPage'
-import PageNotFound from '../containers/PageNotFound/PageNotFound'
+import PageNotFound from '../components/PageNotFound/PageNotFound'
 import {Route, Switch} from 'react-router-dom';
 
 /* App Component  */

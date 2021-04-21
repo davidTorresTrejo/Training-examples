@@ -61,8 +61,9 @@ interface Props extends RouteComponentProps{
    * Injected by the documentation to work in an iframe.
    * You won't need it on your project.
    */
-  items: string[];
+  items: any[];
   children: any;
+  defaultSelected: number;
   window?: () => Window;
 }
 
@@ -72,38 +73,15 @@ const LayoutArea = (props: Props) => {
   const theme = useTheme();
   /* States */
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [selectedIndex, setSelectedIndex] = React.useState(-1);
+  const [selectedIndex, setSelectedIndex] = React.useState(props.defaultSelected);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  const handleListItemClick = (event: any, index: number) => {
+  const handleListItemClick = (event: any, index: number, path: string) => {
     setSelectedIndex(index);
-    console.log(index);
-    /* 
-      Implement switch-case statement to choose path 
-      if statement is to fix the path
-    */
-
-    switch(index){
-      case 0:
-        if(props.history.location.pathname === '/' || props.history.location.pathname === '/home/starred'){
-          props.history.push({pathname: '/home/inbox'});
-        }else{
-          props.history.push({pathname: '/admin/user'});
-        }
-        return;
-
-      case 1:
-        if(props.history.location.pathname === '/' || props.history.location.pathname === '/home/inbox'){
-          props.history.push({pathname: '/home/starred'});
-        }else{
-          props.history.push({pathname: '/admin/config'});
-        }
-        return;
-    }
-    
+    props.history.push({pathname: path});
   }
 
   const drawer = (
@@ -113,14 +91,14 @@ const LayoutArea = (props: Props) => {
     <div>
       <Divider />
       <List>
-        {props.items.map((text, index) => (
+        {props.items.map((object, index) => (
           <ListItem 
-            button key={text}
+            button key={object.name}
             selected = {selectedIndex === index}
-            onClick = {(event) => handleListItemClick(event, index)}
+            onClick = {(event) => handleListItemClick(event, index, object.path)}
           >
             <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText primary={object.name} />
           </ListItem>
         ))}
       </List>
@@ -176,3 +154,30 @@ const LayoutArea = (props: Props) => {
 
 
 export default withRouter(LayoutArea);
+
+
+
+/* Comments */
+
+/* 
+      Implement switch-case statement to choose path 
+      if statement is to fix the path
+    */
+
+      /* switch(index){
+        case 0:
+          if(props.history.location.pathname === '/' || props.history.location.pathname === '/home/starred'){
+            props.history.push({pathname: '/home/inbox'});
+          }else{
+            props.history.push({pathname: '/admin/user'});
+          }
+          return;
+  
+        case 1:
+          if(props.history.location.pathname === '/' || props.history.location.pathname === '/home/inbox'){
+            props.history.push({pathname: '/home/starred'});
+          }else{
+            props.history.push({pathname: '/admin/config'});
+          }
+          return;
+      } */
