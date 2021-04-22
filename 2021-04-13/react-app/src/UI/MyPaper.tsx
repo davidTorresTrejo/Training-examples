@@ -2,6 +2,7 @@ import React from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { Typography } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,13 +23,14 @@ const MyPaper = (props: any) => {
 
   return (
     <div className={classes.root}>
-      <Paper elevation = {1}>
-        <Typography variant = "subtitle2" gutterBottom>
-            {props.title}
+      <Paper elevation={1}>
+        <Typography variant="subtitle2" gutterBottom>
+          {props.title}
         </Typography>
-        <Typography variant = "body1" gutterBottom>
-            {props.body}
+        <Typography variant="body1" gutterBottom>
+          {props.body}
         </Typography>
+        <Button color="primary" onClick={props.clicked}>Details</Button>
       </Paper>
     </div>
   );
@@ -36,7 +38,7 @@ const MyPaper = (props: any) => {
 
 export default MyPaper;
 
-/* 
+/*
     CReate paper from ui and use in inboxComponent
     Clean inboxComponent
 */

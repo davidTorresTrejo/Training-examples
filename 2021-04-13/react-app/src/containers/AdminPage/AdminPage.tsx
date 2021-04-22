@@ -1,22 +1,23 @@
 import React from 'react';
-import {Route, Switch} from 'react-router-dom';
-import LayoutArea from '../../layouts/LayoutArea'
+import { Route, Switch } from 'react-router-dom';
+import LayoutArea from '../../layouts/LayoutArea';
+import Users from '../../components/Users/Users';
 
 /* AdminPage Component */
-class AdminPage extends React.Component{
+class AdminPage extends React.Component {
 
   list = [
-    {name: 'Users', path: '/admin/user'},
-    {name: 'Config', path: '/admin/config'}
+    { name: 'Users', path: '/admin/user' },
+    { name: 'Roles', path: '/admin/roles' }
   ];
 
-  render(){
-    return(
+  render() {
+    return (
       /* Use LayoutAdmin */
-      <LayoutArea items = {this.list} defaultSelected = {-1}>
+      <LayoutArea items={this.list} defaultSelected={-1}>
         <Switch>
-        <Route path = '/admin/user' exact render = {() => <h3>User Component</h3>}></Route>
-          <Route path = '/admin/config' exact render = {() => <h3>Config Component</h3>}></Route>
+          <Route path='/admin/user' exact render={() => <Users></Users>}></Route>
+          <Route path='/admin/roles' exact render={() => <h3>Config Component</h3>}></Route>
         </Switch>
       </LayoutArea>
     );

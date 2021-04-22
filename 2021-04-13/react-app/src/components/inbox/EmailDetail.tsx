@@ -1,7 +1,10 @@
+/* Copy paste the Inbox.tsx 
+    Use Card.tsx
+*/
 import axios from 'axios';
 import React from 'react';
-import MyPaper from '../../UI/MyPaper';
 import MyProgressBar from '../../UI/MyProgress';
+import MyCard from '../../UI/Card'
 
 interface IProps {
   loading: boolean;
@@ -9,7 +12,7 @@ interface IProps {
   error: any;
 }
 
-class Inbox extends React.Component {
+class EmailDetail extends React.Component {
 
   /* Set state */
   state = {
@@ -18,13 +21,13 @@ class Inbox extends React.Component {
     error: null
   };
 
-  render() { return <InboxView {...this.state}></InboxView> };
+  render() { return <EmailDetailView {...this.state}></EmailDetailView> };
 
   componentDidMount() {
 
     axios.get('https://jsonplaceholder.typicode.com/posts')
       .then(response => this.setState({ loading: false, data: response.data, error: null }))
-      .catch(error => console.log(error))
+      .catch(error => this.setState({ loading: false, data: null, error: error }))
 
     // Fetch data from backend
     // const res = fetch('url')
@@ -35,12 +38,7 @@ class Inbox extends React.Component {
 
 
 /* Create a view for Inbox Class */
-class InboxView extends React.Component<IProps>{
-
-  mailSelectedHandler(id: string) {
-    console.log('Selected Email', id);
-
-  }
+class EmailDetailView extends React.Component<IProps>{
 
   renderLoading() {
     const dataTSX = <MyProgressBar></MyProgressBar>
@@ -48,14 +46,7 @@ class InboxView extends React.Component<IProps>{
   }
 
   renderSucces() {
-    const dataTSX = this.props.data.map((item: any) => {
-      return <MyPaper
-        key={item.id}
-        title={item.title}
-        body={item.body}
-        clicked={() => this.mailSelectedHandler(item.id)}
-      />
-    })
+    const dataTSX = <MyCard title={this.props.data.title} body={this.props.data.body}></MyCard>
     return dataTSX;
   }
 
@@ -75,15 +66,6 @@ class InboxView extends React.Component<IProps>{
   }
 }
 
-export default Inbox;
-
-
-
-
-/*
-  Use json place holder
-  install axios
-*/
-
+export default EmailDetail;
 
 

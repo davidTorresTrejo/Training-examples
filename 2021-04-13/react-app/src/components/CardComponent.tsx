@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   },
 });
 
-const CardComponent =  (props: any) => {
+const CardComponent = (props: any) => {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
@@ -38,7 +38,7 @@ const CardComponent =  (props: any) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" color = "primary"><p>{props.titleButton}</p></Button>
+        <Button size="small" color="primary"><p>{props.titleButton}</p></Button>
       </CardActions>
     </Card>
   );

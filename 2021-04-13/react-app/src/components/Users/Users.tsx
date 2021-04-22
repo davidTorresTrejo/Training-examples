@@ -1,7 +1,8 @@
+/* Make the same that in Inbox.tsx */
 import axios from 'axios';
 import React from 'react';
-import MyPaper from '../../UI/MyPaper';
 import MyProgressBar from '../../UI/MyProgress';
+import MyTable from '../../UI/MyTable';
 
 interface IProps {
   loading: boolean;
@@ -9,7 +10,7 @@ interface IProps {
   error: any;
 }
 
-class Inbox extends React.Component {
+class Users extends React.Component {
 
   /* Set state */
   state = {
@@ -18,29 +19,31 @@ class Inbox extends React.Component {
     error: null
   };
 
-  render() { return <InboxView {...this.state}></InboxView> };
+  render() { return <UsersView {...this.state}></UsersView> };
 
   componentDidMount() {
 
     axios.get('https://jsonplaceholder.typicode.com/posts')
-      .then(response => this.setState({ loading: false, data: response.data, error: null }))
-      .catch(error => console.log(error))
+      .then(response => {
+        // modify data here (Custom Data)
+        const users: any[] = response.data;
+        const modUsers = users.map((user: any) => {
+          return { User: user.userId, Email: user.id, City: user.title, Phone: user.body };
+        });
+        this.setState({ loading: false, data: modUsers, error: null });
 
+      })
+      .catch(error => this.setState({ loading: false, data: null, error: error }));
     // Fetch data from backend
     // const res = fetch('url')
-    // then ( data => console.log(data))
+    // then ( data => console.log(data) )
     //.catch(error => concole.log(error))
   }
 }
 
 
 /* Create a view for Inbox Class */
-class InboxView extends React.Component<IProps>{
-
-  mailSelectedHandler(id: string) {
-    console.log('Selected Email', id);
-
-  }
+class UsersView extends React.Component<IProps>{
 
   renderLoading() {
     const dataTSX = <MyProgressBar></MyProgressBar>
@@ -48,14 +51,7 @@ class InboxView extends React.Component<IProps>{
   }
 
   renderSucces() {
-    const dataTSX = this.props.data.map((item: any) => {
-      return <MyPaper
-        key={item.id}
-        title={item.title}
-        body={item.body}
-        clicked={() => this.mailSelectedHandler(item.id)}
-      />
-    })
+    const dataTSX = <MyTable rows={this.props.data}></MyTable>
     return dataTSX;
   }
 
@@ -75,15 +71,5 @@ class InboxView extends React.Component<IProps>{
   }
 }
 
-export default Inbox;
-
-
-
-
-/*
-  Use json place holder
-  install axios
-*/
-
-
+export default Users;
 

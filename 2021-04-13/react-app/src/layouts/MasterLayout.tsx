@@ -20,28 +20,28 @@ const useStyles = makeStyles((theme: Theme) =>
 const MatserLayout = (props: any) => {
   const classes = useStyles();
 
-  return (    
+  return (
     <div className={classes.root}>
       {/* add interactive grids  */}
       <Grid container spacing={3} direction="column" justify="flex-end" alignItems="stretch">
         <Grid item xs={12}>
-            {/* <p>Home | About | Contact Us</p> */}
-            {/* add nav bar */}
-            <MyAppBar></MyAppBar>
+          {/* <p>Home | About | Contact Us</p> */}
+          {/* add nav bar */}
+          <MyAppBar></MyAppBar>
         </Grid>
 
         <Grid item xs={12}>
-            {/* Set LayoutHome or LayoutAdmin */}
-            {props.children}
+          {/* Set LayoutHome or LayoutAdmin */}
+          {props.children}
         </Grid>
 
         <Grid item xs={12}>
-            {/* Add paper elevation */}
-            <Paper elevation={0} className = {classes.paper}>Copyright 2021</Paper>
+          {/* Add paper elevation */}
+          <Paper elevation={0} className={classes.paper}>Copyright 2021</Paper>
         </Grid>
 
       </Grid>
-    </div> 
+    </div>
   );
 }
 

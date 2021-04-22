@@ -4,8 +4,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import {RouteComponentProps,} from 'react-router-dom';
-import {withRouter} from 'react-router';
+import { RouteComponentProps, } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -28,12 +28,12 @@ const MyAppBar = (props: RouteComponentProps) => {
 
 
   /* Handling onClick proparty of Buttons Home & Admin */
-  const homeButtomHandler = () =>{
-    props.history.push({pathname: '/'});
+  const homeButtomHandler = () => {
+    props.history.push({ pathname: '/' });
   }
 
-  const adminButtomHandler = () =>{
-    props.history.push({pathname: '/admin'});
+  const adminButtomHandler = () => {
+    props.history.push({ pathname: '/admin' });
   }
 
   return (
@@ -44,8 +44,8 @@ const MyAppBar = (props: RouteComponentProps) => {
             My Aplication
           </Typography>
           {/* Routes to Home and Admin Pages in Buttons */}
-          <Button color="inherit" onClick = {homeButtomHandler}>Home</Button>
-          <Button color="inherit" onClick = {adminButtomHandler}>Admin</Button>
+          <Button color="inherit" onClick={homeButtomHandler}>Home</Button>
+          <Button color="inherit" onClick={adminButtomHandler}>Admin</Button>
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
@@ -55,6 +55,6 @@ const MyAppBar = (props: RouteComponentProps) => {
 
 export default withRouter(MyAppBar);
 
-/*  Import withRouter export withRoute(MyAppBar) 
+/*  Import withRouter export withRoute(MyAppBar)
     onClick
 */
