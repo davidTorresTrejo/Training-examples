@@ -23,12 +23,12 @@ class Users extends React.Component {
 
   componentDidMount() {
 
-    axios.get('https://jsonplaceholder.typicode.com/posts')
+    axios.get('https://jsonplaceholder.typicode.com/users')
       .then(response => {
         // modify data here (Custom Data)
         const users: any[] = response.data;
         const modUsers = users.map((user: any) => {
-          return { User: user.userId, Email: user.id, City: user.title, Phone: user.body };
+          return { User: user.name, Email: user.email, City: user.address.city, Phone: user.phone };
         });
         this.setState({ loading: false, data: modUsers, error: null });
 

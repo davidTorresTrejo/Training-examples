@@ -21,6 +21,7 @@ class Inbox extends React.Component {
   render() { return <InboxView {...this.state}></InboxView> };
 
   componentDidMount() {
+    
 
     axios.get('https://jsonplaceholder.typicode.com/posts')
       .then(response => this.setState({ loading: false, data: response.data, error: null }))
@@ -65,6 +66,8 @@ class InboxView extends React.Component<IProps>{
   }
 
   render() {
+    console.log('Inbox props: ', this.props);
+
     if (this.props.loading) {
       return this.renderLoading();
     } else if (this.props.data) {
