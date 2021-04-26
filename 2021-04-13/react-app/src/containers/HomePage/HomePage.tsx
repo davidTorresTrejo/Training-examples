@@ -21,10 +21,10 @@ class HomePage extends Component {
       */
       <LayoutArea items={this.list} defaultSelected={-1}>
         <Switch>
-          <Route path='/' exact render={() => <h3>Welcome to Home!</h3>}></Route>
-          <Route path='/home/inbox/:id' exact component={EmailDetail}></Route>
-          <Route path='/home/inbox' component={Inbox}></Route>
-          <Route path='/home/starred' render={() => <h3>Inbox Starred</h3>}></Route>
+          <Route path="/" exact render={() => <h3>Welcome to Home!</h3>}></Route>
+          <Route path="/home/inbox/:id" component={EmailDetail}></Route>
+          <Route path="/home/inbox" exact component={Inbox}></Route>
+          <Route path="/home/starred" render={() => <h3>Inbox Starred</h3>}></Route>
         </Switch>
       </LayoutArea>
     );

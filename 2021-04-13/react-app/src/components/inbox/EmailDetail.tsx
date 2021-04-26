@@ -1,31 +1,45 @@
-/* Copy paste the Inbox.tsx 
-    Use Card.tsx
-*/
 import axios from 'axios';
-import React from 'react';
+import {Component} from 'react';
 import MyProgressBar from '../../UI/MyProgress';
 import MyCard from '../../UI/Card'
+import { RouteComponentProps } from 'react-router';
+import queryString from 'query-string';
 
-interface IProps {
+interface IMatchParams{
+  id: string;
+}
+
+interface IProps extends RouteComponentProps<IMatchParams>{
+}
+
+interface IState {
   loading: boolean;
-  data: any;
+  data: {title: string, body: string} | null;
   error: any;
 }
 
-class EmailDetail extends React.Component {
+class EmailDetail extends Component<IProps> {
 
   /* Set state */
-  state = {
+  state: IState = {
     loading: true,
     data: null,
     error: null
   };
 
-  render() { return <EmailDetailView {...this.state}></EmailDetailView> };
+  render() { return <EmailDetailView {...this.state} {...this.props}></EmailDetailView> };
 
   componentDidMount() {
 
-    axios.get('https://jsonplaceholder.typicode.com/posts')
+    /* fetch id (route params) from adress bar */
+    const id = this.props.match.params.id;
+
+    /*  fethc userId & name (query params) from address bar */
+    const parsed = queryString.parse(this.props.location.search);
+    console.log('Email query params: ', parsed);
+    
+
+    axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`)
       .then(response => this.setState({ loading: false, data: response.data, error: null }))
       .catch(error => this.setState({ loading: false, data: null, error: error }))
 
@@ -36,9 +50,19 @@ class EmailDetail extends React.Component {
   }
 }
 
+interface IPropsEmailDetailView extends RouteComponentProps{
+  loading: boolean;
+  data: {title: string, body: string} | null;
+  error: any;
+}
 
 /* Create a view for Inbox Class */
-class EmailDetailView extends React.Component<IProps>{
+class EmailDetailView extends Component<IPropsEmailDetailView>{
+
+  backButtonSelectedHandler(){
+    console.log('Email Detail View back button clicked');
+    this.props.history.goBack();
+  }
 
   renderLoading() {
     const dataTSX = <MyProgressBar></MyProgressBar>
@@ -46,7 +70,7 @@ class EmailDetailView extends React.Component<IProps>{
   }
 
   renderSucces() {
-    const dataTSX = <MyCard title={this.props.data.title} body={this.props.data.body}></MyCard>
+    const dataTSX = <MyCard title={this.props.data?.title} body={this.props.data?.body} clicked = {() => this.backButtonSelectedHandler()}></MyCard>
     return dataTSX;
   }
 

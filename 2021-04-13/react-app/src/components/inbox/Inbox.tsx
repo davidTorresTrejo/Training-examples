@@ -1,31 +1,38 @@
 import axios from 'axios';
-import React from 'react';
+import {Component} from 'react';
+import { RouteComponentProps } from 'react-router';
 import MyPaper from '../../UI/MyPaper';
 import MyProgressBar from '../../UI/MyProgress';
 
-interface IProps {
+
+interface IProps extends RouteComponentProps{
+
+}
+
+
+interface IState {
   loading: boolean;
-  data: any;
+  data: {} [] | null;
   error: any;
 }
 
-class Inbox extends React.Component {
+class Inbox extends Component <IProps> {
 
   /* Set state */
-  state = {
+  state: IState = {
     loading: true,
     data: null,
     error: null
   };
 
-  render() { return <InboxView {...this.state}></InboxView> };
+  render() { return <InboxView {...this.state} {...this.props}></InboxView> };
 
   componentDidMount() {
     
 
     axios.get('https://jsonplaceholder.typicode.com/posts')
       .then(response => this.setState({ loading: false, data: response.data, error: null }))
-      .catch(error => console.log(error))
+      .catch(error => this.setState({loading: false, data: null, error: error}))
 
     // Fetch data from backend
     // const res = fetch('url')
@@ -35,12 +42,18 @@ class Inbox extends React.Component {
 }
 
 
+interface IpropsInboxView extends RouteComponentProps{
+  loading: boolean;
+  data: {}[] | null;
+  error: any;
+}
+
 /* Create a view for Inbox Class */
-class InboxView extends React.Component<IProps>{
+class InboxView extends Component<IpropsInboxView>{
 
-  mailSelectedHandler(id: string) {
-    console.log('Selected Email', id);
-
+  mailSelectedHandler(id: string, userId: string) {
+    /* console.log('Selected Email', id); */
+    this.props.history.push({pathname: `/home/inbox/${id}`, search: `?userId-${userId}`});
   }
 
   renderLoading() {
@@ -49,12 +62,12 @@ class InboxView extends React.Component<IProps>{
   }
 
   renderSucces() {
-    const dataTSX = this.props.data.map((item: any) => {
+    const dataTSX = this.props.data?.map((item: any) => {
       return <MyPaper
         key={item.id}
         title={item.title}
         body={item.body}
-        clicked={() => this.mailSelectedHandler(item.id)}
+        clicked={() => this.mailSelectedHandler(item.id, item.userId)}
       />
     })
     return dataTSX;

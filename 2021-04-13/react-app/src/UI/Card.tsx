@@ -1,5 +1,3 @@
-/* Use card from material ui */
-
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -40,11 +38,9 @@ export default function MyCard(props: any) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
+        {/* Back Button */}
+        <Button size="small" color="primary" onClick = {props.clicked}>
+          Back
         </Button>
       </CardActions>
     </Card>
