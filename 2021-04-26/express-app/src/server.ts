@@ -1,10 +1,16 @@
 import express from 'express';
 import postRouter from './routes/posts';
 import userRouter from './routes/users';
+import cors from 'cors';
+
 
 const server = express();
-const port = 3000;
+const port = 3500;
 
+
+/* Set cors headers */
+
+server.use(cors());
 
 /*  Loggin Middleware */
 server.use((req, res, next) => {
@@ -28,3 +34,9 @@ server.get('/info', (req, res) => {
 server.listen(port, () => {
     console.log(`Server Running at http://127.0.0.1:${port}`);
 });
+
+
+/* 
+    install cors - npm i cors - @types/cors 
+    import cors from 'cors'
+*/

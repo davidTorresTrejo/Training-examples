@@ -16,6 +16,11 @@ postRouter.get('/', (req, res) => {
     res.json(data.posts);
 });
 
+postRouter.get('/:id', (req, res) => {
+    let post = data.posts.filter( item => item.id.toString() === req.params.id);
+    res.json(post[0]);
+});
+
 postRouter.post('/', (req, res) => {
     res.json('Creating');
 });
