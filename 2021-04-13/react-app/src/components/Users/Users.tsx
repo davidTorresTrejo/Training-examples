@@ -1,8 +1,9 @@
 /* Make the same that in Inbox.tsx */
-import axios from 'axios';
 import React from 'react';
 import MyProgressBar from '../../UI/MyProgress';
 import MyTable from '../../UI/MyTable';
+import axios from '../../axios';
+
 
 interface IProps {
   loading: boolean;
@@ -23,7 +24,7 @@ class Users extends React.Component {
 
   componentDidMount() {
 
-    axios.get('https://jsonplaceholder.typicode.com/users')
+    axios.get('/users')
       .then(response => {
         // modify data here (Custom Data)
         const users: any[] = response.data;

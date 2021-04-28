@@ -17,3 +17,20 @@ ReactDOM.render(
 */
 
 /* Browser Route Here */
+
+/* 
+    Move Layouts into UI
+    Create axios.tsx - indextsx
+
+    import axios, {AxiosIntsance} from 'axios'
+    const instance: AxiosInstance = axios.create({
+        baseURL: url from jsonPlaceHolder
+
+    });
+
+    export default axios;
+
+
+    import in users, emailDetail, posts
+
+*/

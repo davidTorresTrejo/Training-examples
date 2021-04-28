@@ -1,8 +1,8 @@
-import axios from 'axios';
 import {Component} from 'react';
 import { RouteComponentProps } from 'react-router';
 import MyPaper from '../../UI/MyPaper';
 import MyProgressBar from '../../UI/MyProgress';
+import axios from '../../axios';
 
 
 interface IProps extends RouteComponentProps{
@@ -30,7 +30,7 @@ class Inbox extends Component <IProps> {
   componentDidMount() {
     
 
-    axios.get('https://jsonplaceholder.typicode.com/posts')
+    axios.get('/posts')
       .then(response => this.setState({ loading: false, data: response.data, error: null }))
       .catch(error => this.setState({loading: false, data: null, error: error}))
 
