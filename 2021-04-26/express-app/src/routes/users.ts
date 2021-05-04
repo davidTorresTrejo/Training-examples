@@ -18,7 +18,7 @@ let data = {
 /* Read all Users */
 userRoute.get('/', async (req, res) => {
     /* res.json(data.posts); */
-    let [user, error] = await handleAsync(getRepository(Users).find());
+    let [user, error] = await handleAsync(getRepository(Users).find({relations: ['address', 'company']}));
     if (error) return res.send(error);
     res.send(user);
 });
@@ -27,7 +27,7 @@ userRoute.get('/', async (req, res) => {
 userRoute.get('/:id', async (req, res) => {
 
     let id = req.params.id;
-    let [user, error] = await handleAsync(getRepository(Users).findOne(id));
+    let [user, error] = await handleAsync(getRepository(Users).findOne(id, {relations: ['address', 'company']}));
     if (error) return res.send(error);
 
     if (user) {
@@ -53,13 +53,17 @@ userRoute.post('/', async (req, res) => {
 /* Update a single User based on id */
 userRoute.patch('/:id', async (req, res) => {
 
-    const id = req.params.id;
-    const data = req.body;
+    const id = Number(req.params.id);
+    /* const data = req.body; */
+    const data = {id: id, ...req.body};
 
-    let [response, error] = await handleAsync(getRepository(Users).update(id, data));
+    /* let [response, error] = await handleAsync(getRepository(Users).update(id, data)); */
+    let [user, error] = await handleAsync(getRepository(Users).save(data));
+
+
     if (error) return res.send(error);
 
-    let [updateUser, error2] = await handleAsync(getRepository(Users).findOne(id));
+    let [updateUser, error2] = await handleAsync(getRepository(Users).findOne(id, {relations: ['address', 'company']}));
     if (error) return res.send(error2);
 
     if (updateUser) {

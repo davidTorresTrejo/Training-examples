@@ -25,7 +25,7 @@ async function connectToPersistance(){
     
 }
 
-server.use(express.urlencoded());
+/* server.use(express.urlencoded()); */
 server.use(express.json());
 
 /* Call function */
