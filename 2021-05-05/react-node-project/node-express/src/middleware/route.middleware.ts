@@ -1,5 +1,5 @@
 import express from 'express';
-import IRoute from '../routes/index.route';
+import {IRoute} from '../routes/index.route';
 
 const registerRouteMiddleware = (server: express.Application, routes: IRoute[]) => {
     routes.forEach( (route: IRoute) => {

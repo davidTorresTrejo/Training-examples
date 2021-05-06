@@ -1,7 +1,7 @@
 import {Entity, PrimaryGeneratedColumn, Column} from 'typeorm';
 
 @Entity()
-class Posts{
+class Todo{
 
     @PrimaryGeneratedColumn()
     id?: number;
@@ -13,8 +13,7 @@ class Posts{
     title?: string;
 
     @Column()
-    body?: string;
+    completed?: boolean;
 }
 
-export default Posts;
-
+export default Todo;

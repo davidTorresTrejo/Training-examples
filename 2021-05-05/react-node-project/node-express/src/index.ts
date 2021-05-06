@@ -1,14 +1,26 @@
 import 'dotenv/config';
 import Server from './server';
-import PostsRoute from './routes/posts.route';
-import UsersRoute from './routes/users.route';
+
+import {Route} from './routes/index.route';
+import { Service } from './services/index.services';
+import Post from './models/post.entity';
+import Todo from './models/todo.entity';
 
 
+/* Create Routes */
+const postRoute = new Route().register(`/posts`, new Service(Post));
+const todoRoute = new Route().register(`/todos`, new Service(Todo));
+
+
+/* Initialize server */
 const server = new Server(
     [
-        new PostsRoute(),
-        new UsersRoute()
+        postRoute,
+        todoRoute
     ]
 );
 
+
+/* Run server */
 server.listen();
+

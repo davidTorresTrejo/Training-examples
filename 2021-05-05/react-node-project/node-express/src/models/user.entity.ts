@@ -4,7 +4,7 @@ import Company from './company.entity';
 
 
 @Entity()
-class Users{
+class User{
 
     @PrimaryGeneratedColumn()
     id?: number;
@@ -30,4 +30,4 @@ class Users{
     company?: Company;
 }
 
-export default Users;
+export default User;
