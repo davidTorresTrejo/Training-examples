@@ -1,4 +1,5 @@
-import {Entity, PrimaryGeneratedColumn, Column} from 'typeorm';
+import {Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn} from 'typeorm';
+import User from './user.entity';
 
 @Entity()
 class Company{
@@ -8,6 +9,10 @@ class Company{
 
     @Column()
     name?: string;
+
+    @OneToOne( () => User, user => user.company, {onDelete: 'CASCADE'})
+    @JoinColumn()
+    user?: User;
 }
 
 export default Company;

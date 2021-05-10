@@ -5,7 +5,7 @@ import {ConnectionOptions, createConnection} from 'typeorm';
 
 import registerCommonMiddleware from './middleware/common.middleware';
 import registerLoggingMiddlewar from './middleware/logging.middleware';
-import registerRouteMiddleware from './middleware/route.middleware';
+import { registerRouteMiddleware, registerUnhandledRoutesMiddleware } from './middleware/route.middleware';
 import registerErrorHandlingMiddleware from './middleware/error.middleware';
 
 
@@ -48,6 +48,8 @@ class Server {
     }
 
     private registerErrorHandling() {
+        
+        registerUnhandledRoutesMiddleware(this.server);
         registerErrorHandlingMiddleware(this.server);
     }
 

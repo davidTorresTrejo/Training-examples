@@ -21,12 +21,12 @@ class User{
     @Column()
     phone?: string;
 
-    @OneToOne(() => Address, {cascade: true})
-    @JoinColumn({name: 'addressId'})
+    @OneToOne(() => Address, address => address.user, {cascade: true})
+    /* @JoinColumn({name: 'addressId'}) */
     address?: Address;
 
-    @OneToOne(() => Company, {cascade: true})
-    @JoinColumn({name: 'companyId'})
+    @OneToOne(() => Company, company => company.user, {cascade: true})
+    /* @JoinColumn({name: 'companyId'}) */
     company?: Company;
 }
 
