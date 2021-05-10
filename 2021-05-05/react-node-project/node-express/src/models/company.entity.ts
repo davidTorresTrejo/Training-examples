@@ -10,7 +10,7 @@ class Company{
     @Column()
     name?: string;
 
-    @OneToOne( () => User, user => user.company, {onDelete: 'CASCADE'})
+    @OneToOne(() => User, user => user.company, {onDelete: 'CASCADE'})
     @JoinColumn()
     user?: User;
 }

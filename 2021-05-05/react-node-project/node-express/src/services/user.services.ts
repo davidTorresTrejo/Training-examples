@@ -7,7 +7,7 @@ class UserService extends Service {
 
     find = async () => {
 
-        let [items, error] = await handleAsync(getRepository(this.entity).find({relations: ["address, company"]}));
+        let [items, error] = await handleAsync(getRepository(this.entity).find({relations: ["address", "company"]}));
 
         if (error) throw error;
         return items;
@@ -15,7 +15,7 @@ class UserService extends Service {
 
     findOne = async (id: string) => {
 
-        let [item, error] = await handleAsync(getRepository(this.entity).findOne(id, {relations: ["address, company"]}));
+        let [item, error] = await handleAsync(getRepository(this.entity).findOne(id, {relations: ["address", "company"]}));
 
         if (error) throw error;
         return item;
@@ -29,7 +29,7 @@ class UserService extends Service {
 
         if (error) throw error;
 
-        let [itemUpdated, error2] = await handleAsync(getRepository(this.entity).update(id, {relations: ["address, company"]}));
+        let [itemUpdated, error2] = await handleAsync(getRepository(this.entity).update(id, {relations: ["address", "company"]}));
         if (error2) throw error2;
 
         return itemUpdated;
