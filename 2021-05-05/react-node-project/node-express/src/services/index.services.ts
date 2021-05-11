@@ -1,5 +1,6 @@
 import { getRepository } from 'typeorm';
 import { handleAsync } from '../shared/utilities';
+import { AdaptorError } from '../shared/error';
 
 interface IService {
 
@@ -23,7 +24,7 @@ class Service implements IService {
         const newItem = getRepository(this.entity).create(data);
         let [item, error] = await handleAsync(getRepository(this.entity).save(newItem));
 
-        if (error) throw error;
+        if (error) throw new AdaptorError (error);
         return item;
     }
 
@@ -31,7 +32,7 @@ class Service implements IService {
 
         let [items, error] = await handleAsync(getRepository(this.entity).find());
 
-        if (error) throw error;
+        if (error) throw new AdaptorError (error);
         return items;
     }
 
@@ -39,7 +40,7 @@ class Service implements IService {
 
         let [item, error] = await handleAsync(getRepository(this.entity).findOne(id));
 
-        if (error) throw error;
+        if (error) throw new AdaptorError (error);
         return item;
     }
 
@@ -49,7 +50,7 @@ class Service implements IService {
         if (error) throw error;
 
         let [updatedItem, errorUpdate] = await handleAsync(getRepository(this.entity).findOne(id));
-        if (errorUpdate) throw errorUpdate;
+        if (errorUpdate) throw new AdaptorError (errorUpdate);
 
         return updatedItem;
     }
@@ -57,7 +58,7 @@ class Service implements IService {
     delete = async (id: string) => {
 
         let [response, error] = await handleAsync(getRepository(this.entity).delete(id));
-        if (error) throw error;
+        if (error) throw new AdaptorError (error);
 
         return response;
     }

@@ -1,6 +1,7 @@
-import express, { Request, Response, NextFunction ,Router } from 'express';
-import {handleAsync} from '../shared/utilities';
-import {IService} from '../services/index.services';
+import express, { Request, Response, NextFunction, Router } from 'express';
+import { handleAsync } from '../shared/utilities';
+import { IService } from '../services/index.services';
+import { EntityNotFoundError } from '../shared/error';
 
 
 interface IRoute {
@@ -37,10 +38,10 @@ class Route implements IRoute {
     /* Create a Post */
     protected post = async (request: Request, response: Response, next: NextFunction) => {
 
-        const data = request.body; 
+        const data = request.body;
         let [newItem, error] = await handleAsync(this.service.create(data));
 
-        if (error) return response.send(error);
+        if (error) return next(error);
         response.json(newItem);
     }
 
@@ -51,7 +52,7 @@ class Route implements IRoute {
 
         let [items, error] = await handleAsync(this.service.find(getOption));
 
-        if (error) return response.send(error);
+        if (error) return next(error);
         response.json(items);
     }
 
@@ -61,12 +62,12 @@ class Route implements IRoute {
         const id = request.params.id;
         let [item, error] = await handleAsync(this.service.findOne(id));
 
-        if (error) return response.send(error);
+        if (error) return next(error);
 
-        if (item){
+        if (item) {
             response.json(item);
-        }else{
-            response.send(`No post found for ${id}!`);
+        } else {
+            next(new EntityNotFoundError(id));
         }
 
     }
@@ -79,12 +80,12 @@ class Route implements IRoute {
 
         let [updatedItem, error] = await handleAsync(this.service.update(id, data));
 
-        if (error) return response.send(error);
+        if (error) return next(error);
 
-        if (updatedItem){
+        if (updatedItem) {
             response.json(updatedItem);
-        }else{
-            response.send(`No post found for ${id}!`);
+        } else {
+            next(new EntityNotFoundError(id));
         }
     }
 
@@ -96,12 +97,12 @@ class Route implements IRoute {
 
         let [deleteResponse, error] = await handleAsync(this.service.delete(id));
 
-        if (error) return response.send(error);
+        if (error) return next(error);
 
-        if (deleteResponse.affected === 1){
+        if (deleteResponse.affected === 1) {
             response.json({ deleted: true });
-        }else{
-            response.send(`No post found for ${id}!`);
+        } else {
+            next(new EntityNotFoundError(id));
         }
     }
 

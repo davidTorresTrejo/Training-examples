@@ -1,17 +1,21 @@
 import express, { Request, Response, NextFunction, response } from 'express';
 
 
-/* Change this method  */
-
 const registerErrorHandlingMiddleware = (server: express.Application) => {
 
+    /* Error handling middleware */
     server.use((error: any, req: Request, res: Response, next: NextFunction) => {
+        
+        let origin = error.origin;
         let status = error.status || 500;
-        let messagge = error.messagge || 'something went wrong';
+        let message = error.message || 'something went wrong';
+
+        console.log(`Error Handler: `, origin, status, message);
+        
 
         response
-            /* .status(status) */
-            .send({status: status, messagge: messagge})
+            .status(status)
+            .send({status: status, messagge: message})
     });
 }
 

@@ -1,7 +1,8 @@
-import express, { Request, Response, NextFunction ,Router } from 'express';
-import {handleAsync} from '../shared/utilities';
-import {IService} from '../services/index.services';
+import express, { Request, Response, NextFunction, Router } from 'express';
+import { handleAsync } from '../shared/utilities';
+import { IService } from '../services/index.services';
 import { Route } from './index.route';
+import { EntityNotFoundError } from '../shared/error';
 
 /* UserRoute Class */
 
@@ -31,7 +32,7 @@ class UserRoute extends Route {
 
         let [items, error] = await handleAsync(this.service.find(getOption));
 
-        if (error) return response.send(error);
+        if (error) return next(error);
         response.json(items);
     }
 
@@ -42,11 +43,11 @@ class UserRoute extends Route {
 
         let [deleteResponse, error] = await handleAsync(this.service.delete(id));
 
-        if (error) return response.send(error);
-        if (deleteResponse.affected === 1){
-            response.json({ deleted: true, messagge: `All users deleted Successfully`});
-        }else{
-            response.send(`No post found for ${id}!`);
+        if (error) return next(error);
+        if (deleteResponse.affected === 1) {
+            response.json({ deleted: true, messagge: `All users deleted Successfully` });
+        } else {
+            next(new EntityNotFoundError(id));
         }
     }
 
