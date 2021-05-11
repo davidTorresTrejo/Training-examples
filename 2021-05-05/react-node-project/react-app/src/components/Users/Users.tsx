@@ -4,13 +4,6 @@ import MyProgressBar from '../../UI/MyProgress';
 import MyTable from '../../UI/MyTable';
 import axios from '../../axios';
 
-
-interface IProps {
-  loading: boolean;
-  data: any;
-  error: any;
-}
-
 class Users extends React.Component {
 
   /* Set state */
@@ -20,26 +13,52 @@ class Users extends React.Component {
     error: null
   };
 
-  render() { return <UsersView {...this.state}></UsersView> };
+  searchKeypPressHandler = (event: any) => {
+    console.log(event.target.value);
+    if (event.key === `Enter`) {
+      
+      const getOption = event.target.value;
 
-  componentDidMount() {
+      axios.get(`/api/users?name=${getOption}`)
+        .then(response => {
+          // modify data here (Custom Data)
+          const users: any[] = response.data;
+          const modUsers = users.map((user: any) => {
+            return { User: user.name, Email: user.email, City: user.address.city, Phone: user.phone, Company: user.company.name };
+          });
+          this.setState({ loading: false, data: modUsers, error: null });
 
-    axios.get('/api/users')
-      .then(response => {
-        // modify data here (Custom Data)
-        const users: any[] = response.data;
-        const modUsers = users.map((user: any) => {
-          return { User: user.name, Email: user.email, City: user.address.city, Phone: user.phone };
-        });
-        this.setState({ loading: false, data: modUsers, error: null });
+        })
+        .catch(error => this.setState({ loading: false, data: null, error: error }));
+    }
+}
 
-      })
-      .catch(error => this.setState({ loading: false, data: null, error: error }));
-    // Fetch data from backend
-    // const res = fetch('url')
-    // then ( data => console.log(data) )
-    //.catch(error => concole.log(error))
-  }
+componentDidMount() {
+  axios.get(`/api/users`)
+    .then(response => {
+      // modify data here (Custom Data)
+      const users: any[] = response.data;
+      const modUsers = users.map((user: any) => {
+        return { User: user.name, Email: user.email, City: user.address.city, Phone: user.phone, Company: user.company.name };
+      });
+      this.setState({ loading: false, data: modUsers, error: null });
+
+    })
+    .catch(error => this.setState({ loading: false, data: null, error: error }));
+  // Fetch data from backend
+  // const res = fetch('url')
+  // then ( data => console.log(data) )
+  //.catch(error => concole.log(error))
+}
+
+render() { return <UsersView {...this.state} searchHandler={this.searchKeypPressHandler}></UsersView> };
+}
+
+interface IProps {
+  loading: boolean;
+  data: any;
+  error: any;
+  searchHandler: any;
 }
 
 
@@ -52,7 +71,7 @@ class UsersView extends React.Component<IProps>{
   }
 
   renderSucces() {
-    const dataTSX = <MyTable rows={this.props.data}></MyTable>
+    const dataTSX = <MyTable rows={this.props.data} ></MyTable>
     return dataTSX;
   }
 
