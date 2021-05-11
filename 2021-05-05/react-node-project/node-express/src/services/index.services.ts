@@ -4,7 +4,7 @@ import { handleAsync } from '../shared/utilities';
 interface IService {
 
     create: (data: any) => Promise<any>;
-    find: () => Promise<any>;
+    find: (options: any) => Promise<any>;
     findOne: (id: string) => Promise<any>;
     update: (id: string, data: any) => Promise<any>;
     delete: (id: string) => Promise<any>;
@@ -27,7 +27,7 @@ class Service implements IService {
         return item;
     }
 
-    find = async () => {
+    find = async (options: any) => {
 
         let [items, error] = await handleAsync(getRepository(this.entity).find());
 

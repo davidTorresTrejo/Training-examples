@@ -28,9 +28,7 @@ class Route implements IRoute {
         this.router.get('/:id', this.getOne);
         this.router.patch('/:id', this.patch);
         this.router.delete('/:id', this.delete);
-
         return this;
-
     }
 
 
@@ -49,7 +47,9 @@ class Route implements IRoute {
     /* Make a Get */
     protected get = async (request: Request, response: Response, next: NextFunction) => {
 
-        let [items, error] = await handleAsync(this.service.find());
+        let getOption = null;
+
+        let [items, error] = await handleAsync(this.service.find(getOption));
 
         if (error) return response.send(error);
         response.json(items);

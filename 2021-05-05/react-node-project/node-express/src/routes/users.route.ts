@@ -24,8 +24,18 @@ class UserRoute extends Route {
 
     /* HTTP Methods */
 
-    /* Make a User delete */
+    /* Make a Get */
+    protected get = async (request: Request, response: Response, next: NextFunction) => {
 
+        let getOption = request.query.name;
+
+        let [items, error] = await handleAsync(this.service.find(getOption));
+
+        if (error) return response.send(error);
+        response.json(items);
+    }
+
+    /* Make a User delete */
     protected delete = async (request: Request, response: Response, next: NextFunction) => {
 
         const id = request.params.id;

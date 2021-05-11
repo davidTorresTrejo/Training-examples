@@ -5,9 +5,22 @@ import { Service } from './index.services';
 
 class UserService extends Service {
 
-    find = async () => {
+    find = async (options: any) => {
 
-        let [items, error] = await handleAsync(getRepository(this.entity).find({relations: ["address", "company"]}));
+        /* Query for username */
+        let [items, error] = [null, null];
+        if (options){
+            [items, error] = await handleAsync(
+                getRepository(this.entity)
+                .createQueryBuilder(`user`)
+                .leftJoinAndSelect(`user.address`, `address`)
+                .leftJoinAndSelect(`user.company`, `company`)
+                .where(`user.name ilike :name`, {name: `%${options}%`})
+                .getMany()
+            );
+        }else{
+            [items, error] = await handleAsync(getRepository(this.entity).find({relations: ["address", "company"]}));
+        }
 
         if (error) throw error;
         return items;
