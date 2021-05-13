@@ -3,13 +3,16 @@ import LayoutArea from '../../layouts/LayoutArea';
 import { Route, Switch } from 'react-router-dom';
 import Inbox from '../../components/inbox/Inbox'
 import EmailDetail from '../../components/inbox/EmailDetail'
+import Counter from '../../components/Counter/Counter';
 
 /* HomePage Component */
 class HomePage extends Component {
 
   list = [
     { name: 'Inbox', path: '/home/inbox' },
-    { name: 'Starred', path: '/home/starred' }
+    { name: 'Starred', path: '/home/starred' },
+    { name: 'Counter', path: '/home/counter' }
+
   ];
 
   render() {
@@ -25,6 +28,7 @@ class HomePage extends Component {
           <Route path="/home/inbox/:id" component={EmailDetail}></Route>
           <Route path="/home/inbox" exact component={Inbox}></Route>
           <Route path="/home/starred" render={() => <h3>Inbox Starred</h3>}></Route>
+          <Route path="/home/counter" exact component={Counter}></Route>
         </Switch>
       </LayoutArea>
     );
