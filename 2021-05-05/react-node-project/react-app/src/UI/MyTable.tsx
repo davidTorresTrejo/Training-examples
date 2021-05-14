@@ -24,6 +24,7 @@ const useStyles = makeStyles({
 
 interface IProps {
     rows: any[];
+    searchHandler: any;
 }
 
 export default function MyTable(props: IProps) {
@@ -42,7 +43,7 @@ export default function MyTable(props: IProps) {
 
     return (
         <Paper className={classes.root}>
-            <TextField id="outlined-basic" label="User"/>
+            <TextField id="standard-basic" label="User" onKeyDown={props.searchHandler}/>
             <TableContainer className={classes.container}>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>

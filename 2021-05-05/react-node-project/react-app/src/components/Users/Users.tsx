@@ -13,45 +13,32 @@ class Users extends React.Component {
     error: null
   };
 
-  searchKeypPressHandler = (event: any) => {
-    console.log(event.target.value);
-    if (event.key === `Enter`) {
-      
+  searchKeyPressHandler = (event: any) => {
+    if (event.key === `Enter`){
+      /* console.log( `data: `, event.target.value); */
       const getOption = event.target.value;
-
-      axios.get(`/api/users?name=${getOption}`)
-        .then(response => {
-          // modify data here (Custom Data)
-          const users: any[] = response.data;
-          const modUsers = users.map((user: any) => {
-            return { User: user.name, Email: user.email, City: user.address.city, Phone: user.phone, Company: user.company.name };
-          });
-          this.setState({ loading: false, data: modUsers, error: null });
-
-        })
-        .catch(error => this.setState({ loading: false, data: null, error: error }));
+      this.fetchUsers(`/api/users?name=${getOption}`);
     }
-}
+  }
 
-componentDidMount() {
-  axios.get(`/api/users`)
-    .then(response => {
-      // modify data here (Custom Data)
-      const users: any[] = response.data;
-      const modUsers = users.map((user: any) => {
-        return { User: user.name, Email: user.email, City: user.address.city, Phone: user.phone, Company: user.company.name };
-      });
-      this.setState({ loading: false, data: modUsers, error: null });
+  fetchUsers = (route: string) => {
+    axios.get(route)
+      .then(response => {
+        const users: any[] = response.data;
+        const modUsers = users.map((user: any) => {
+          return { User: user.name, Email: user.email, City: user.address.city, Phone: user.phone, Company: user.company.name };
+        });
+        this.setState({ loading: false, data: modUsers, error: null });
+      })
+      .catch(error => this.setState({ loading: false, data: null, error: error }));
+  }
 
-    })
-    .catch(error => this.setState({ loading: false, data: null, error: error }));
-  // Fetch data from backend
-  // const res = fetch('url')
-  // then ( data => console.log(data) )
-  //.catch(error => concole.log(error))
-}
 
-render() { return <UsersView {...this.state} searchHandler={this.searchKeypPressHandler}></UsersView> };
+  componentDidMount() {
+    this.fetchUsers(`/api/users`);
+  }
+
+  render() { return <UsersView {...this.state} searchHandler={this.searchKeyPressHandler}></UsersView> };
 }
 
 interface IProps {
@@ -71,7 +58,7 @@ class UsersView extends React.Component<IProps>{
   }
 
   renderSucces() {
-    const dataTSX = <MyTable rows={this.props.data} ></MyTable>
+    const dataTSX = <MyTable rows={this.props.data} searchHandler={this.props.searchHandler} ></MyTable>
     return dataTSX;
   }
 
