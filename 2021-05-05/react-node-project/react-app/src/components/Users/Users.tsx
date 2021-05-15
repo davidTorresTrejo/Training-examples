@@ -4,7 +4,19 @@ import MyProgressBar from '../../UI/MyProgress';
 import MyTable from '../../UI/MyTable';
 import axios from '../../axios';
 
-class Users extends React.Component {
+/* Redux */
+import { connect } from 'react-redux';
+import { updateUsersAction, updateUsersErrorAction} from '../../redux/actions/users';
+
+interface IUserProps{
+  loading: boolean;
+  users: any;
+  error: any;
+  updateUsersAction: any;
+  updateUsersErrorAction: any;
+}
+
+class Users extends React.Component<IUserProps>{
 
   /* Set state */
   state = {
@@ -28,9 +40,11 @@ class Users extends React.Component {
         const modUsers = users.map((user: any) => {
           return { User: user.name, Email: user.email, City: user.address.city, Phone: user.phone, Company: user.company.name };
         });
-        this.setState({ loading: false, data: modUsers, error: null });
+        /* this.setState({ loading: false, data: modUsers, error: null }); */
+        this.props.updateUsersAction(modUsers);
       })
-      .catch(error => this.setState({ loading: false, data: null, error: error }));
+      /* .catch(error => this.setState({ loading: false, data: null, error: error })); */
+      .catch(error => this.props.updateUsersErrorAction(error));
   }
 
 
@@ -38,12 +52,12 @@ class Users extends React.Component {
     this.fetchUsers(`/api/users`);
   }
 
-  render() { return <UsersView {...this.state} searchHandler={this.searchKeyPressHandler}></UsersView> };
+  render() { return <UsersView {...this.props} searchHandler={this.searchKeyPressHandler}></UsersView> };
 }
 
 interface IProps {
   loading: boolean;
-  data: any;
+  users: any;
   error: any;
   searchHandler: any;
 }
@@ -58,7 +72,7 @@ class UsersView extends React.Component<IProps>{
   }
 
   renderSucces() {
-    const dataTSX = <MyTable rows={this.props.data} searchHandler={this.props.searchHandler} ></MyTable>
+    const dataTSX = <MyTable rows={this.props.users} searchHandler={this.props.searchHandler} ></MyTable>
     return dataTSX;
   }
 
@@ -70,7 +84,7 @@ class UsersView extends React.Component<IProps>{
   render() {
     if (this.props.loading) {
       return this.renderLoading();
-    } else if (this.props.data) {
+    } else if (this.props.users) {
       return this.renderSucces();
     } else {
       return this.renderError();
@@ -78,5 +92,12 @@ class UsersView extends React.Component<IProps>{
   }
 }
 
-export default Users;
+/* Connect to Redux */
+const mapStateToProps = (store: any) => ({
+  loading: store.users.loading,
+  users: store.users.data,
+  error: store.users.error
+});
+
+export default connect(mapStateToProps, {updateUsersAction, updateUsersErrorAction}) (Users);
 

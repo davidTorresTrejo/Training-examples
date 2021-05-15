@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
-import { incrementCounter, decrementCounter} from '../../redux//actions/counter';
+import { incrementCounter, decrementCounter} from '../../redux/actions/counter';
 
 
 /* CReate an interface */
