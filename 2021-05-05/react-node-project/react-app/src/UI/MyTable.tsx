@@ -44,6 +44,7 @@ export default function MyTable(props: IProps) {
     return (
         <Paper className={classes.root}>
             <TextField id="standard-basic" label="User" onKeyDown={props.searchHandler}/>
+            { props.rows.length ?
             <TableContainer className={classes.container}>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
@@ -76,7 +77,8 @@ export default function MyTable(props: IProps) {
                     </TableBody>
                 </Table>
             </TableContainer>
-
+                : <h3>No Data Found!</h3>
+            }
             <TablePagination
                 rowsPerPageOptions={[5, 10, 15]}
                 component="div"

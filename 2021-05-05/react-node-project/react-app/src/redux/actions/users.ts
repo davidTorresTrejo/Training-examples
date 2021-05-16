@@ -1,5 +1,7 @@
 export const UPDATE_USERS = ` [users] Update User`;
-export const UPDATE_USERS_ERRORS = ` [users] Update Users Error`;
+export const USERS_ERRORS = ` [users] Update Users Error`;
+export const GET_USERS = ` [users] Get Users`;
+
 
 export const updateUsersAction = (users: any) => ({
     type: UPDATE_USERS,
@@ -8,6 +10,12 @@ export const updateUsersAction = (users: any) => ({
 
 
 export const updateUsersErrorAction = (error: any) => ({
-    type: UPDATE_USERS_ERRORS,
+    type: USERS_ERRORS,
     payload: error
+});
+
+
+export const getUsersAction = (option: any) =>  ({
+    type: GET_USERS,
+    payload: option
 });

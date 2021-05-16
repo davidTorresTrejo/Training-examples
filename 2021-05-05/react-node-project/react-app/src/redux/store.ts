@@ -1,7 +1,8 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import counterReducer from './reducers/counter';
 import usersReducer from './reducers/users';
+import { usersMdl } from './middleware/users';
 
 /* Combine all reducers */
 const combineReducer = combineReducers({
@@ -9,10 +10,16 @@ const combineReducer = combineReducers({
     users: usersReducer
 });
 
+
+/* Combine All Middlewares */
+const combineMiddleware = [...usersMdl];
+
 /* Create Central Store */
 export const store = createStore(
     combineReducer,
-    composeWithDevTools()
+    composeWithDevTools(applyMiddleware(...combineMiddleware))
 );
+
+
 
 
