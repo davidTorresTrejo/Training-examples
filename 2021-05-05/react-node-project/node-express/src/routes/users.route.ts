@@ -21,7 +21,7 @@ class UserRoute extends Route {
         this.router.post('/', validationMiddleware(UserValidation) ,this.post);
         this.router.get('/', this.get);
         this.router.get('/:id', this.getOne);
-        this.router.patch('/:id', this.patch);
+        this.router.patch('/:id',this.patch);
         this.router.delete('/:id', this.delete);
         return this;
     }
