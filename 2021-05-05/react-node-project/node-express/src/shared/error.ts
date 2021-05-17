@@ -40,6 +40,12 @@ export class PersistanceConnectivityError extends ExtendedError {
     }
 }
 
+export class DataValidationError extends ExtendedError {
+    constructor(error: string){
+        super(500, 'Route Layer' ,`Validation Errors : ${error}`);  
+    }
+}
+
 
 
 
