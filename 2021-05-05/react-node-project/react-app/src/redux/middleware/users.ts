@@ -1,6 +1,6 @@
-import { Middleware, MiddlewareAPI, Dispatch, AnyAction} from 'redux';
+import { Middleware, MiddlewareAPI, Dispatch, AnyAction } from 'redux';
 import axios from 'axios';
-import { GET_USERS, updateUsersAction, updateUsersErrorAction} from '../actions/users';
+import { GET_USERS, updateUsersAction, updateErrorAction} from '../actions/users';
 
 
 export const getUsersMiddleware: Middleware = (api: MiddlewareAPI) => (next: Dispatch<AnyAction>) => (action: any) => {
@@ -18,7 +18,7 @@ export const getUsersMiddleware: Middleware = (api: MiddlewareAPI) => (next: Dis
                 });
                 api.dispatch(updateUsersAction(modUsers));
             })
-            .catch(error => api.dispatch(updateUsersErrorAction(error)))
+            .catch(error => api.dispatch(updateErrorAction(error)))
     }
 }
 

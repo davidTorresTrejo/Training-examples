@@ -4,7 +4,7 @@ const initialState = {
     loading: true,
     data: null,
     error: null
-}
+};
 
 /* User Reducer */
 const usersReducer = (state = initialState, action: any) => {
@@ -16,7 +16,6 @@ const usersReducer = (state = initialState, action: any) => {
     }
 
     return state;
-
 }
 
 export default usersReducer;

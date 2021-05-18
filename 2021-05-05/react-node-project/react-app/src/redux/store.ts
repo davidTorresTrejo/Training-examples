@@ -12,12 +12,12 @@ const combineReducer = combineReducers({
 
 
 /* Combine All Middlewares */
-const combineMiddleware = [...usersMdl];
+const combineMiddlewares = [...usersMdl];
 
 /* Create Central Store */
 export const store = createStore(
     combineReducer,
-    composeWithDevTools(applyMiddleware(...combineMiddleware))
+    composeWithDevTools(applyMiddleware(...combineMiddlewares))
 );
 
 

@@ -6,19 +6,19 @@ import axios from '../../axios';
 
 /* Redux */
 import { connect } from 'react-redux';
-import { updateUsersAction, updateUsersErrorAction, getUsersAction} from '../../redux/actions/users';
+import { updateUsersAction, updateErrorAction} from '../../redux/actions/users';
 
-/* interface IUserProps{
+interface IUserProps{
   loading: boolean;
   users: any;
   error: any;
   updateUsersAction: any;
-  updateUsersErrorAction: any;
-} */
+  updateErrorAction: any;
+}
 
-/* class Users extends React.Component<IUserProps>{
+class Users extends React.Component<IUserProps>{
 
-  //Set state
+  /* Set state */
   state = {
     loading: true,
     data: null,
@@ -27,7 +27,7 @@ import { updateUsersAction, updateUsersErrorAction, getUsersAction} from '../../
 
   searchKeyPressHandler = (event: any) => {
     if (event.key === `Enter`){
-      //console.log( `data: `, event.target.value);
+      /* console.log( `data: `, event.target.value); */
       const getOption = event.target.value;
       this.fetchUsers(`/api/users?name=${getOption}`);
     }
@@ -40,41 +40,16 @@ import { updateUsersAction, updateUsersErrorAction, getUsersAction} from '../../
         const modUsers = users.map((user: any) => {
           return { User: user.name, Email: user.email, City: user.address.city, Phone: user.phone, Company: user.company.name };
         });
-        //this.setState({ loading: false, data: modUsers, error: null });
+        /* this.setState({ loading: false, data: modUsers, error: null }); */
         this.props.updateUsersAction(modUsers);
       })
-      //.catch(error => this.setState({ loading: false, data: null, error: error }));
-      .catch(error => this.props.updateUsersErrorAction(error));
+      /* .catch(error => this.setState({ loading: false, data: null, error: error })); */
+      .catch(error => this.props.updateErrorAction(error));
   }
 
 
   componentDidMount() {
     this.fetchUsers(`/api/users`);
-  }
-
-  render() { return <UsersView {...this.props} searchHandler={this.searchKeyPressHandler}></UsersView> };
-} */
-
-
-/* API calls from Redux Middleware & State in Redux */
-interface IUserProps{
-  loading: boolean;
-  users: any;
-  error: any;
-  getUsersAction: any;
-}
-
-class Users extends React.Component<IUserProps>{
-
-  searchKeyPressHandler = (event: any) => {
-    if (event.key === `Enter`){
-      const option = event.target.value;
-      this.props.getUsersAction(option);
-    }
-  }
-
-  componentDidMount() {
-    this.props.getUsersAction(null);
   }
 
   render() { return <UsersView {...this.props} searchHandler={this.searchKeyPressHandler}></UsersView> };
@@ -86,6 +61,7 @@ interface IProps {
   error: any;
   searchHandler: any;
 }
+
 
 /* Create a view for Inbox Class */
 class UsersView extends React.Component<IProps>{
@@ -123,6 +99,4 @@ const mapStateToProps = (store: any) => ({
   error: store.users.error
 });
 
-/* export default connect(mapStateToProps, {updateUsersAction, updateUsersErrorAction}) (Users); */
-export default connect(mapStateToProps, {getUsersAction}) (Users);
-
+export default connect(mapStateToProps, {updateUsersAction, updateErrorAction}) (Users);
