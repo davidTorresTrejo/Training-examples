@@ -5,6 +5,7 @@ import {ConnectionOptions, createConnection} from 'typeorm';
 
 import registerCommonMiddleware from './middleware/common.middleware';
 import registerLoggingMiddlewar from './middleware/logging.middleware';
+import registerResponseMiddleware from './middleware/response.middleware';
 import { registerRouteMiddleware, registerUnhandledRoutesMiddleware } from './middleware/route.middleware';
 import registerErrorHandlingMiddleware from './middleware/error.middleware';
 import {PersistanceConnectivityError} from './shared/error';
@@ -41,6 +42,7 @@ class Server {
     private registerMiddleware() {
         registerCommonMiddleware(this.server);
         registerLoggingMiddlewar(this.server);
+        registerResponseMiddleware(this.server);
     }
 
     private registerRoutes(routes: IRoute[]) {
