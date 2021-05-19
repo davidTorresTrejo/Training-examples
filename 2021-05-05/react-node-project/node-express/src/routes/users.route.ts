@@ -1,7 +1,7 @@
-import express, { Request, Response, NextFunction, Router } from 'express';
+import express, { Request, Response, NextFunction, Router, IRouter } from 'express';
 import { handleAsync } from '../shared/utilities';
 import { IService } from '../services/index.services';
-import { Route } from './index.route';
+import { IRoute, Route } from './index.route';
 import { EntityNotFoundError } from '../shared/error';
 import { validationMiddleware } from '../middleware/validation.middleware';
 import UserValidation from '../models/user.validation';
@@ -13,7 +13,7 @@ class UserRoute extends Route {
 
     /* Register */
 
-    register = (api: string, service: IService) => {
+    register = (api: string, service: IService): IRoute => {
 
         this.api = api;
         this.service = service;

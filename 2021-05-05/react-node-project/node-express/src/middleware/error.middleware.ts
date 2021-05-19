@@ -13,9 +13,7 @@ const registerErrorHandlingMiddleware = (server: express.Application) => {
         console.log(`Error Handler: `, origin, status, message);
         
 
-        response
-            .status(status)
-            .send({status: status, messagge: message})
+        response.status(status).send({status, message});
     });
 }
 

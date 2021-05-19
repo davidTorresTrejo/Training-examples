@@ -42,7 +42,7 @@ export class PersistanceConnectivityError extends ExtendedError {
 
 export class DataValidationError extends ExtendedError {
     constructor(messages: any){
-        super(500, 'Route Layer' ,`Validation Errors : ${messages}`);  
+        super(400, 'Route Layer' ,`Validation Errors : ${messages}`);  
     }
 }
 

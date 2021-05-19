@@ -19,7 +19,7 @@ class Route implements IRoute {
 
     /* Register */
 
-    register = (api: string, service: IService) => {
+    register = (api: string, service: IService): IRoute => {
 
         this.api = api;
         this.service = service;
