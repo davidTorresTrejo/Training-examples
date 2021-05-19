@@ -1,4 +1,4 @@
-import { IsDefined, IsEmail, IsNotEmpty, IsNotEmptyObject, IsObject, IsString, Length, ValidateNested } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsNotEmptyObject, IsObject, IsString, Length, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 
 
