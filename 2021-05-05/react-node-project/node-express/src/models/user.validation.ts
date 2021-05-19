@@ -53,3 +53,16 @@ class UserValidation{
 }
 
 export default UserValidation;
+
+
+/* Class For Authentication */
+
+export class AuthUserValidation{
+
+    @IsEmail({}, {message: `Email is invalid`})
+    email?: string;
+
+    @IsString({message: `Password must be a string`})
+    @Length(3, 8, {message: `Password must be beetwen : 3 - 8 characters`})
+    password?: string;
+}
