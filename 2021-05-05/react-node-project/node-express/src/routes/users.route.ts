@@ -4,6 +4,7 @@ import { IService } from '../services/index.services';
 import { IRoute, Route } from './index.route';
 import { EntityNotFoundError } from '../shared/error';
 import { validationMiddleware } from '../middleware/validation.middleware';
+import { authMiddleware } from "../middleware/auth.middleware";
 import UserValidation from '../models/user.validation';
 
 
@@ -18,6 +19,7 @@ class UserRoute extends Route {
         this.api = api;
         this.service = service;
 
+        this.router.use(authMiddleware());
         this.router.post('/', validationMiddleware(UserValidation) ,this.post);
         this.router.get('/', this.get);
         this.router.get('/:id', this.getOne);

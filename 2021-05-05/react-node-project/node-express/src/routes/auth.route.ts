@@ -5,6 +5,7 @@ import { IService } from '../services/index.services';
 import { handleAsync } from '../shared/utilities';
 import { IRoute, Route} from './index.route';
 
+var nJwt = require('njwt');
 
 class AuthRoute extends Route {
 
@@ -21,10 +22,25 @@ class AuthRoute extends Route {
     protected post = async (request: Request, response: Response, next: NextFunction) => {
         const data = request.body;
 
-        let [newItem, error] = await handleAsync(this.service.find({where: data}));
+        let [items, error] = await handleAsync(this.service.find(data));
 
         if (error) return next(error);
-        response.json(newItem);
+
+        if (items.length) {
+            // User Authenticated
+            // Create a jwt token and send it along with the response
+            const payload = items[0].id;
+            const scope = `admin`;
+            const claims = {iss: `ejAmerica.com`, sub: payload, scope: scope};
+            const token = nJwt.create(claims, `n2ssEMEtE0LB0GxCAbrZw3dlV7o=`);
+            token.setExpiration(new Date().getTime() + 60*2000);
+
+            // append token to items
+            items.push({token: token.compact()});
+            
+        }
+
+        response.json(items);
     }
 
 }
