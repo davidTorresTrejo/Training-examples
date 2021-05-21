@@ -27,7 +27,12 @@ const MyAppBar = (props: RouteComponentProps) => {
   const classes = useStyles();
 
 
-  /* Handling onClick proparty of Buttons Home & Admin */
+  /* Handling onClick proparty of Buttons Home, Admin & Login */
+
+  const appButtomHandler = () => {
+    props.history.push({ pathname: '/' });
+  }
+
   const homeButtomHandler = () => {
     props.history.push({ pathname: '/' });
   }
@@ -36,17 +41,21 @@ const MyAppBar = (props: RouteComponentProps) => {
     props.history.push({ pathname: '/admin' });
   }
 
+  const loginButtomHandler = () => {
+    props.history.push({ pathname: '/login' });
+  }
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            My Aplication
+            <Button color="inherit" onClick={appButtomHandler}>MyAplication</Button>
           </Typography>
           {/* Routes to Home and Admin Pages in Buttons */}
           <Button color="inherit" onClick={homeButtomHandler}>Home</Button>
           <Button color="inherit" onClick={adminButtomHandler}>Admin</Button>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" onClick={loginButtomHandler}>Login</Button>
         </Toolbar>
       </AppBar>
     </div>
