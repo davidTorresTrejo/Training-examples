@@ -1,18 +1,17 @@
 import { Component } from 'react';
-/* import LayoutArea from '../../layouts/LayoutArea';
-import { Route, Switch } from 'react-router-dom'; */
-
-/* Import LoginForm  */
-import LoginForm from '../../UI/LoginForm';
+import LayoutLogin from '../../layouts/LayoutLogin';
+import Login from '../../components/Login/Login';
 
 /* LoginPage Component */
 class LoginPage extends Component {
 
-/* I need to create another layout specific for logging purpose */
+  /* I need to create another layout specific for logging purpose */
 
   render() {
     return (
-      <LoginForm></LoginForm>
+      <LayoutLogin>
+        <Login></Login>
+      </LayoutLogin>
     );
   }
 }
