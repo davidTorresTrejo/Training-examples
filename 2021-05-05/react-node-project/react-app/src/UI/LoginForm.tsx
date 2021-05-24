@@ -1,6 +1,7 @@
-import  { useState, useEffect, useRef } from 'react';
+import  { useState } from 'react';
 import clsx from 'clsx';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { green } from '@material-ui/core/colors';
 import Paper from '@material-ui/core/Paper';
@@ -36,20 +37,27 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function LoginForm(props: any) {
+interface IProps{
+  loginHandler: any;
+  loading: boolean;
+  failure: boolean;
+}
+
+export default function LoginForm(props: IProps) {
   const classes = useStyles();
 
-
   /* Material UI */
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const timer = useRef<number>();
+  const loading = props.loading;
+  const failure = props.failure;
+  /* const [loading, setLoading] = useState(false);
+  const [failure, setFailure] = useState(false);
+  const timer = useRef<number>(); */
 
   const buttonClassname = clsx({
-    [classes.buttonSuccess]: success,
+    [classes.buttonSuccess]: failure,
   });
 
-  useEffect(() => {
+  /* useEffect(() => {
     return () => {
       clearTimeout(timer.current);
     };
@@ -57,14 +65,14 @@ export default function LoginForm(props: any) {
 
   const handleButtonClick = () => {
     if (!loading) {
-      setSuccess(false);
+      setFailure(false);
       setLoading(true);
       timer.current = window.setTimeout(() => {
-        setSuccess(true);
+        setFailure(true);
         setLoading(false);
       }, 2000);
     }
-  };
+  }; */
 
 
   /* Data */
@@ -81,7 +89,7 @@ export default function LoginForm(props: any) {
 
   const loginClickHandler = (event: any) => {
     props.loginHandler(email, password);
-    handleButtonClick();
+    /* handleButtonClick(); */
     /* console.log(`email: ${email} , password: ${password}`); */
   }
 
@@ -93,11 +101,17 @@ export default function LoginForm(props: any) {
         <Input placeholder="Password" inputProps={{ 'aria-label': 'description' }} onChange={passwordChangeHandler}/> <br/><br/>
         {/* <Button variant="contained" color="primary" onClick={loginClickHandler}>Login</Button> */}
         <div className={classes.wrapper}>
-          <Button variant="contained" color="primary" className={buttonClassname} disabled={loading} onClick={loginClickHandler}>
+          <Button fullWidth variant="contained" color="primary" className={buttonClassname} disabled={loading} onClick={loginClickHandler}>
             Login
           </Button>
           {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
         </div>
+        {
+          props.failure ? 
+            <Typography variant="subtitle1" gutterBottom>{props.failure}</Typography>
+          :
+            <p></p>
+        }
       </form>
     </Paper>
   );

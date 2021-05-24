@@ -1,24 +1,80 @@
 import { Component } from 'react';
+import { Redirect } from 'react-router';
 import LoginForm from '../../UI/LoginForm';
+import axios from '../../axios';
+import { dataValidation } from '../../shared/validation';
+import { IsEmail, IsString, Length } from 'class-validator';
 
-class Login extends Component{
 
-    onLoginClickHandler = (email: string, password: string) => {
-        console.log(`email: ${email} , password: ${password}`);
-    }
+/* Class For Authentication */
 
-    render () { return <LoginView {...this.props} loginHandler={this.onLoginClickHandler}></LoginView>};
+export class AuthUserValidation {
+
+    @IsEmail({}, { message: `Email is invalid` })
+    email?: string;
+
+    @IsString({ message: `Password must be a string` })
+    @Length(3, 8, { message: `Password must be beetwen : 3 - 8 characters` })
+    password?: string;
 }
 
-interface Iprops{
+class Login extends Component {
+
+    state = { authenticating: false, token: null, user: null, error: null, isAuthenticated: false };
+
+    onLoginClickHandler = async (email: string, password: string) => {
+        console.log(`email: ${email} , password: ${password}`);
+
+        /* Setting up progress bar */
+        this.setState({ authenticating: true, token: null, user: null, error: null, isAuthenticated: false });
+
+        /* Validate email & password */
+        const errors = await dataValidation(AuthUserValidation, { email, password });
+
+        if (errors) {
+            /* Setting up progress bar */
+            console.log(`Data Validation Failed: `, errors);
+            this.setState({ authenticating: false, token: null, user: null, error: errors, isAuthenticated: false });
+        } else {
+            /* Authenticate User */
+            axios.post(`/api/auth`, { email: email, password: password })
+                .then(response => {
+                    if (response.data.length) {
+                        console.log(`API Validation Successful, user found:  `, response.data[1].token, response.data[0]);
+                        this.setState({ authenticating: false, token: response.data[1].token, user: response.data[0], error: null, isAuthenticated: true });
+                    } else {
+                        console.log(`API Validation Successful, no user found:  `, response.data);
+                        this.setState({ authenticating: false, token: null, user: null, error: `No user found`, isAuthenticated: false });
+                    }
+                })
+                .catch(error => {
+                    console.log(`API Call Failed: `, error);
+                    this.setState({ authenticating: false, token: null, user: null, error: error, isAuthenticated: false });
+                })
+        }
+
+    }
+
+    render() { return <LoginView {...this.state} loginHandler={this.onLoginClickHandler}></LoginView> };
+}
+
+interface Iprops {
+    authenticating: boolean;
+    isAuthenticated: boolean;
+    error: any;
     loginHandler: any;
 }
 
 class LoginView extends Component<Iprops>{
-    
-    render(){
-        return(
-            <LoginForm loginHandler={this.props.loginHandler}></LoginForm>
+
+    render() {
+
+        if(this.props.isAuthenticated){
+            return <Redirect to={`/`}></Redirect>
+        }
+
+        return (
+            <LoginForm loginHandler={this.props.loginHandler} loading={this.props.authenticating} failure={this.props.error}></LoginForm>
         );
     }
 
