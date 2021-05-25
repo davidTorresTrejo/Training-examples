@@ -48,7 +48,7 @@ export default function LoginForm(props: IProps) {
 
   /* Material UI */
   const loading = props.loading;
-  const failure = props.failure;
+  const failure = props.failure ? true : false;
   /* const [loading, setLoading] = useState(false);
   const [failure, setFailure] = useState(false);
   const timer = useRef<number>(); */
@@ -97,8 +97,8 @@ export default function LoginForm(props: IProps) {
   return (
     <Paper className={classes.root} >
       <form noValidate autoComplete="off">
-        <Input placeholder="Email" inputProps={{ 'aria-label': 'description' }} onChange={emailChangeHandler}/> <br/><br/>
-        <Input placeholder="Password" inputProps={{ 'aria-label': 'description' }} onChange={passwordChangeHandler}/> <br/><br/>
+        <Input fullWidth placeholder="Email" inputProps={{ 'aria-label': 'description' }} onChange={emailChangeHandler}/> <br/><br/>
+        <Input fullWidth placeholder="Password" inputProps={{ 'aria-label': 'description' }} onChange={passwordChangeHandler}/> <br/><br/>
         {/* <Button variant="contained" color="primary" onClick={loginClickHandler}>Login</Button> */}
         <div className={classes.wrapper}>
           <Button fullWidth variant="contained" color="primary" className={buttonClassname} disabled={loading} onClick={loginClickHandler}>

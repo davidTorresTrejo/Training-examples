@@ -5,10 +5,11 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: 'flex',
+      justifyContent: 'center',
     },
     content: {
-      flexGrow: 1,
-      //padding: theme.spacing(0, 3, 3, 3),
+      /* flexGrow: 1, */
+      padding: theme.spacing(3),
     },
   }),
 );
