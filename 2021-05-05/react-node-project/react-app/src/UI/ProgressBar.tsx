@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const MyProgressBar = () => {
+const ProgressBar = () => {
   const classes = useStyles();
 
   return (
@@ -24,4 +24,4 @@ const MyProgressBar = () => {
   );
 }
 
-export default MyProgressBar;
+export default ProgressBar;

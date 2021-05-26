@@ -1,7 +1,7 @@
 import {Component} from 'react';
 import { RouteComponentProps } from 'react-router';
-import MyPaper from '../../UI/MyPaper';
-import MyProgressBar from '../../UI/MyProgress';
+import Paper from '../../UI/Paper';
+import ProgressBar from '../../UI/ProgressBar';
 import axios from '../../axios';
 
 
@@ -57,13 +57,13 @@ class InboxView extends Component<IpropsInboxView>{
   }
 
   renderLoading() {
-    const dataTSX = <MyProgressBar></MyProgressBar>
+    const dataTSX = <ProgressBar></ProgressBar>
     return dataTSX;
   }
 
   renderSucces() {
     const dataTSX = this.props.data?.map((item: any) => {
-      return <MyPaper
+      return <Paper
         key={item.id}
         title={item.title}
         body={item.body}

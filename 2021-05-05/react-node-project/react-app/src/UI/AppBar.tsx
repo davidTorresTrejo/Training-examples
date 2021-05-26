@@ -30,7 +30,7 @@ interface IProps extends RouteComponentProps{
 }
 
 /* props: RouteComponentProps */
-const MyAppBar = ( props:  IProps ) => {
+const Bar = ( props:  IProps ) => {
   const classes = useStyles();
 
 
@@ -81,7 +81,7 @@ const mapStateToProps = ( store: any ) => ({
 });
 
 /* export default withRouter(MyAppBar); */
-export default connect(mapStateToProps, { authLogoutAction }) (withRouter(MyAppBar));
+export default connect(mapStateToProps, { authLogoutAction }) (withRouter(Bar));
 
 /*  Import withRouter export withRoute(MyAppBar)
     onClick

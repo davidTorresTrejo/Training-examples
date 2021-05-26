@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import MyAppBar from '../UI/MyAppBar'
+import AppBar from '../UI/AppBar'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,7 +27,7 @@ const MatserLayout = (props: any) => {
         <Grid item xs={12}>
           {/* <p>Home | About | Contact Us</p> */}
           {/* add nav bar */}
-          <MyAppBar></MyAppBar>
+          <AppBar></AppBar>
         </Grid>
 
         <Grid item xs={12}>

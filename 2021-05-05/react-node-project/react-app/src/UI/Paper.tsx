@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const MyPaper = (props: any) => {
+const PostPaper = (props: any) => {
   const classes = useStyles();
 
   return (
@@ -36,7 +36,7 @@ const MyPaper = (props: any) => {
   );
 }
 
-export default MyPaper;
+export default PostPaper;
 
 /*
     CReate paper from ui and use in inboxComponent

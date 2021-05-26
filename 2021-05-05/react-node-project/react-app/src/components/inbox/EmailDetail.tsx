@@ -1,6 +1,6 @@
 import {Component} from 'react';
-import MyProgressBar from '../../UI/MyProgress';
-import MyCard from '../../UI/Card'
+import ProgressBar from '../../UI/ProgressBar';
+import Card from '../../UI/Card'
 import { RouteComponentProps } from 'react-router';
 import queryString from 'query-string';
 import axios from '../../axios';
@@ -65,12 +65,12 @@ class EmailDetailView extends Component<IPropsEmailDetailView>{
   }
 
   renderLoading() {
-    const dataTSX = <MyProgressBar></MyProgressBar>
+    const dataTSX = <ProgressBar></ProgressBar>
     return dataTSX;
   }
 
   renderSucces() {
-    const dataTSX = <MyCard title={this.props.data?.title} body={this.props.data?.body} clicked = {() => this.backButtonSelectedHandler()}></MyCard>
+    const dataTSX = <Card title={this.props.data?.title} body={this.props.data?.body} clicked = {() => this.backButtonSelectedHandler()}></Card>
     return dataTSX;
   }
 

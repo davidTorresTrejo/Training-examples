@@ -1,7 +1,7 @@
 /* Make the same that in Inbox.tsx */
 import React from 'react';
-import MyProgressBar from '../../UI/MyProgress';
-import MyTable from '../../UI/MyTable';
+import ProgressBar from '../../UI/ProgressBar';
+import Table from '../../UI/Table';
 import axios from '../../axios';
 
 /* Redux */
@@ -67,12 +67,12 @@ interface IProps {
 class UsersView extends React.Component<IProps>{
 
   renderLoading() {
-    const dataTSX = <MyProgressBar></MyProgressBar>
+    const dataTSX = <ProgressBar></ProgressBar>
     return dataTSX;
   }
 
   renderSucces() {
-    const dataTSX = <MyTable rows={this.props.users} searchHandler={this.props.searchHandler} ></MyTable>
+    const dataTSX = <Table rows={this.props.users} searchHandler={this.props.searchHandler} ></Table>
     return dataTSX;
   }
 

@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MyCard(props: any) {
+export default function PostCard(props: any) {
   const classes = useStyles();
 
   return (
