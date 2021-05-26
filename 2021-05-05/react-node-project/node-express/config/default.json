@@ -1,0 +1,13 @@
+{
+    "react_app_path": "../../../react-app/build",
+    "jwt": {
+        "issuer": "ejAmerica.com",
+        "expiresIn": 120000,
+        "algorithm": "HS256",
+        "secret": "n2ssEMEtE0LB0GxCAbrZw3dlV7o=",
+        "header_key": "AUTH_TOKEN"
+    },
+    "response_format": {
+        "header_key": "RESPONSE_FORMAT"
+    }
+}

@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
+import config from '../shared/config';
 
 
 const registerCommonMiddleware = (server: express.Application) => {
@@ -12,7 +13,7 @@ const registerCommonMiddleware = (server: express.Application) => {
 
 
     /* Serve Static Files */
-    server.use(express.static(path.resolve(__dirname, `../../../react-app/build`)));
+    server.use(express.static(config.get(`react_app_path`)));
 
     
 }

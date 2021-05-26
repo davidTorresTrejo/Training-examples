@@ -16,9 +16,8 @@ const registerErrorHandlingMiddleware = (server: express.Application) => {
         let status = error.status || 500;
         let message = error.message || 'something went wrong';
 
-        console.log(`Error Handler: `, origin, status, message);
+        /* console.log(`Error Handler: `, origin, status, message); */
         
-
         /* response.status(status).send({status, message}); */
         response.status(status).send({status, message});
 

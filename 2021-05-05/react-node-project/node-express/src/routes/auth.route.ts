@@ -4,6 +4,7 @@ import { AuthUserValidation } from '../models/user.validation';
 import { IService } from '../services/index.services';
 import { handleAsync } from '../shared/utilities';
 import { IRoute, Route} from './index.route';
+import config from '../shared/config';
 
 var nJwt = require('njwt');
 
@@ -31,9 +32,9 @@ class AuthRoute extends Route {
             // Create a jwt token and send it along with the response
             const payload = items[0].id;
             const scope = `admin`;
-            const claims = {iss: `ejAmerica.com`, sub: payload, scope: scope};
-            const token = nJwt.create(claims, `n2ssEMEtE0LB0GxCAbrZw3dlV7o=`);
-            token.setExpiration(new Date().getTime() + 60*2000);
+            const claims = {iss: config.get(`jwt:issuer`), sub: payload, scope: scope};
+            const token = nJwt.create(claims, config.get(`jwt:secret`), config.get(`jwt:algorithm`));
+            token.setExpiration(new Date().getTime() + config.get(`jwt:expiresIn`));
 
             // append token to items
             items.push({token: token.compact()});

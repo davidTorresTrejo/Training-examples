@@ -12,7 +12,7 @@ const responseFormatterMiddleware = ( server: Application) => {
             if (format === `xml`){
                 body = js2xmlparser.parse(`result`, body);
             }
-            console.log(`responseFormatterMiddleware: `, format, body);
+            /* console.log(`responseFormatterMiddleware: `, format, body); */
             return body;
         }
     ));
