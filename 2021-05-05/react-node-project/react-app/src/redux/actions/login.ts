@@ -1,6 +1,7 @@
 export const AUTH_START = `[login] Auth Start`;
 export const AUTH_SUCCESS = `[login] Auth Success`;
 export const AUTH_ERROR = `[login] Auth Error`;
+export const AUTH_LOGOUT = `[login] Auth Logout`;
 
 
 export const authStartAction = () => (
@@ -22,5 +23,11 @@ export const authErrorAction = (error: any) => (
     {
         type: AUTH_ERROR,
         payload: error
+    }
+);
+
+export const authLogoutAction = () => (
+    {
+        type: AUTH_LOGOUT
     }
 );

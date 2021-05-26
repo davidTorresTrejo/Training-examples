@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { RouteComponentProps, } from 'react-router-dom';
 import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
+import { authLogoutAction } from '../redux/actions/login';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -22,8 +24,13 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+interface IProps extends RouteComponentProps{
+  isAuthenticated: boolean;
+  authLogoutAction: any;
+}
+
 /* props: RouteComponentProps */
-const MyAppBar = (props: RouteComponentProps) => {
+const MyAppBar = ( props:  IProps ) => {
   const classes = useStyles();
 
 
@@ -44,6 +51,9 @@ const MyAppBar = (props: RouteComponentProps) => {
   const loginButtomHandler = () => {
     props.history.push({ pathname: '/login' });
   }
+  const logoutButtomHandler = () => {
+    props.authLogoutAction();
+  }
 
   return (
     <div className={classes.root}>
@@ -54,15 +64,24 @@ const MyAppBar = (props: RouteComponentProps) => {
           </Typography>
           {/* Routes to Home and Admin Pages in Buttons */}
           <Button color="inherit" onClick={homeButtomHandler}>Home</Button>
-          <Button color="inherit" onClick={adminButtomHandler}>Admin</Button>
-          <Button color="inherit" onClick={loginButtomHandler}>Login</Button>
+          { props.isAuthenticated ? <Button color="inherit" onClick={adminButtomHandler}>Admin</Button> : <p></p> }
+
+          { props.isAuthenticated ? <Button color="inherit" onClick={logoutButtomHandler}>Logout</Button>
+            : <Button color="inherit" onClick={loginButtomHandler}>Login</Button>
+          }
+
         </Toolbar>
       </AppBar>
     </div>
   );
 }
 
-export default withRouter(MyAppBar);
+const mapStateToProps = ( store: any ) => ({
+  isAuthenticated: store.auth.isAuthenticated
+});
+
+/* export default withRouter(MyAppBar); */
+export default connect(mapStateToProps, { authLogoutAction }) (withRouter(MyAppBar));
 
 /*  Import withRouter export withRoute(MyAppBar)
     onClick

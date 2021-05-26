@@ -1,4 +1,4 @@
-import { AUTH_START, AUTH_SUCCESS, AUTH_ERROR } from '../actions/login';
+import { AUTH_START, AUTH_SUCCESS, AUTH_ERROR, AUTH_LOGOUT } from '../actions/login';
 
 const initialState = {
     authenticating: false,
@@ -18,6 +18,8 @@ const loginReducer = (state = initialState, action: any) => {
             return { authenticating: false, token: action.token, user: action.payload, error: null, isAuthenticated: true };
         case AUTH_ERROR:
             return { authenticating: false, token: null, user: null, error: action.payload, isAuthenticated: false };
+        case AUTH_LOGOUT:
+            return { authenticating: false, token: null, user: null, error: null, isAuthenticated: false };
     }
     
     return state;

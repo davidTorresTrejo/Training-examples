@@ -1,4 +1,5 @@
 import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
+import { store } from './redux/store';
 
 
 const instance: AxiosInstance = axios.create({
@@ -9,7 +10,7 @@ const instance: AxiosInstance = axios.create({
 
 instance.interceptors.request.use((request: AxiosRequestConfig) => {
     
-    request.headers[`MyAuthemticationToken`] = 'AUTH092332'
+    request.headers[`AUTH_TOKEN`] = store.getState().auth.token;
     console.log('Axios Interceptors: ', request.url);
     return request;
 }, error => {
@@ -18,7 +19,7 @@ instance.interceptors.request.use((request: AxiosRequestConfig) => {
 
 
 instance.interceptors.response.use((response: AxiosResponse) => {
-    console.log('Axios Interceptors Responde: ', response.data);
+    console.log('Axios Interceptors Response: ', response.data);
     return response;
 }, error => {
     return Promise.reject(error);

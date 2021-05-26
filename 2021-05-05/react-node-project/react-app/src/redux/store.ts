@@ -7,6 +7,7 @@ import loginReducer from './reducers/login';
 
 
 import { usersMdl } from './middleware/users';
+import { AUTH_LOGOUT } from './actions/login';
 
 /* Combine all reducers */
 const combineReducer = combineReducers({
@@ -15,13 +16,21 @@ const combineReducer = combineReducers({
     auth: loginReducer
 });
 
-
 /* Combine All Middlewares */
 const combineMiddlewares = [...usersMdl];
 
+/* Code to re-initialize all reducers */
+const rootReducer = (state: any, action: any) => {
+    if(action.type === AUTH_LOGOUT){
+        state = undefined;
+    }
+
+    return combineReducer(state, action);
+}
+
 /* Create Central Store */
 export const store = createStore(
-    combineReducer,
+    rootReducer,
     composeWithDevTools(applyMiddleware(...combineMiddlewares))
 );
 
