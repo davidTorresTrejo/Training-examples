@@ -1,0 +1,8 @@
+.Column{
+    margin: 8px;
+    border: 1px solid orange;
+    border-radius: 2px;
+    width: 250px;
+    background-color: yellow;
+
+}

@@ -5,6 +5,7 @@ import Inbox from '../../components/inbox/Inbox'
 import EmailDetail from '../../components/inbox/EmailDetail'
 import Counter from '../../components/Counter/Counter';
 import { connect } from 'react-redux';
+import Starred from '../../components/Starred/Starred';
 
 
 interface IProps {
@@ -29,7 +30,7 @@ class HomePage extends Component<IProps>{
         <Route path="/" exact render={() => <h3>Welcome to Home!</h3>}></Route>
         <Route path="/home/inbox/:id" component={EmailDetail}></Route>
         <Route path="/home/inbox" exact component={Inbox}></Route>
-        <Route path="/home/starred" render={() => <h3>Inbox Starred</h3>}></Route>
+        <Route path="/home/starred" exact component={Starred}></Route>
         <Route path="/home/counter" exact component={Counter}></Route>
       </Switch>
     );
