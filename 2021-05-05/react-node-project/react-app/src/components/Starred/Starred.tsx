@@ -35,8 +35,65 @@ class Starred extends Component{
         // fetch items from backend & populate states
     }
 
+    onDragStart = ( start: any) =>{
+        /* const start = {
+            draggableId: 'item-1',
+            type: 'TYPE',
+            reason: 'DROP',
+            source: {
+                droppableId: 'column-1',
+                index: 0
+            }
+        } */
+    }
+
+    onDragUpdate = () => {
+        /* const update = {
+            ...start,
+            destination: {
+                droppableId: 'column-1',
+                index: 1
+            }
+        } */
+    }
+
     onDragEnd = ( result: any ) => {
         // Update the itemIds with new order
+
+        /* const result = {
+            ...update,
+            reason: 'DROP'
+        } */
+
+        const { source, destination, draggableId} = result;
+
+        // Don´t deal if item is pulled outside of a drappable area
+        if(!destination){
+            return;
+        }
+
+        // if destination & source are same, don´t do anything
+        if(destination.droppableId === source.droppableId && destination.index === source.index){
+            return;
+        }
+
+        // NOTE: if source & destination columns are same 
+        // Persist data changes (new order of itemIds)
+        // retreive column
+        const column = this.state.columns[destination.droppableId];
+        // retreive items
+        const newItemsIds = Array.from(column.itemIds);
+        // remove item from initial position
+        newItemsIds.splice(source.index, 1);
+        // insert item into new position
+        newItemsIds.splice(destination.index, 0, draggableId);
+
+        const newColumn = { ...column, itemIds: newItemsIds }
+
+        const newState = { ...this.state, columns: { ...this.state.columns, [newColumn.id]: newColumn } }
+
+        // Now, update the state!
+        this.setState(newState);
     }
 
     render(){

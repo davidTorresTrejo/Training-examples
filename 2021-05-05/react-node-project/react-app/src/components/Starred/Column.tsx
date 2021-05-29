@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
+import Item from './Item';
 import './Starred.css';
 
 interface IProps {
@@ -15,8 +16,8 @@ class Column extends Component<IProps>{
                 <h3>{this.props.column.title}</h3>
                 <Droppable droppableId={this.props.column.id}>
                     {(provided, snapshot) => (
-                        <div ref={provided.innerRef} {...provided.droppableProps}>
-                            <h3>Items go here...</h3>
+                        <div className="ItemList" ref={provided.innerRef} {...provided.droppableProps}>
+                            {this.props.items.map((item, index) => <Item key={item.id} item={item} index={index}></Item> )}
                             {provided.placeholder}
                         </div>
                     )}
