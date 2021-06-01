@@ -19,7 +19,7 @@ class Item extends Component<IProps>{
     render() {
 
         // To disable one item
-        const isDragDisabled = this.props.item.id === `item-1`;
+        const isDragDisabled = this.props.item.id === `item-5`;
 
         return (
             <Draggable draggableId={this.props.item.id} index={this.props.index} isDragDisabled={isDragDisabled}>

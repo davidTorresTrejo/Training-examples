@@ -184,6 +184,8 @@ class Starred extends Component {
                             // retreive all item values (array) within this column
                             const items = column.itemIds.map((itemId: string) => this.state.items[itemId]);
 
+                            /* const isDropDisabled = false; */
+
                             // display the column with items
                             return <Column key={column.id} column={column} items={items}></Column>
 
