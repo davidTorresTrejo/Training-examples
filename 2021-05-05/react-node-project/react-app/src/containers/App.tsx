@@ -19,20 +19,22 @@ class App extends React.Component<IProps>{
       <Switch>
           <Route path="/" exact component={HomePage}></Route>
           <Route path="/home" component={HomePage}></Route>
-          <Route path="/admin" component={AdminPage}></Route>
+          {/* <Route path="/admin" component={AdminPage}></Route> */}
           <Route path="/login" component={LoginPage}></Route>
           <Route render={() => <PageNotFound title="Page Not Found...." />} />
         </Switch>
     );
 
     if (this.props.isAuthenticated) {
-      <Switch>
+      routes = (
+        <Switch>
           <Route path="/" exact component={HomePage}></Route>
           <Route path="/home" component={HomePage}></Route>
           <Route path="/admin" component={AdminPage}></Route>
           <Route path="/login" component={LoginPage}></Route>
           <Route render={() => <PageNotFound title="Page Not Found...." />} />
         </Switch>
+      );
     }
 
     return (

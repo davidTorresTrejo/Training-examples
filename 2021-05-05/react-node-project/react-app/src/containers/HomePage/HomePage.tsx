@@ -28,8 +28,8 @@ class HomePage extends Component<IProps>{
     let routes = (
       <Switch>
         <Route path="/" exact render={() => <h3>Welcome to Home!</h3>}></Route>
-        <Route path="/home/inbox/:id" component={EmailDetail}></Route>
         <Route path="/home/inbox" exact component={Inbox}></Route>
+        <Route path="/home/inbox/:id" component={EmailDetail}></Route>
         <Route path="/home/starred" exact component={Starred}></Route>
         <Route path="/home/counter" exact component={Counter}></Route>
       </Switch>
@@ -39,8 +39,8 @@ class HomePage extends Component<IProps>{
       routes = (
         <Switch>
           <Route path="/" exact render={() => <h3>Welcome {this.props.user.name}!</h3>}></Route>
-          <Route path="/home/inbox/:id" component={EmailDetail}></Route>
           <Route path="/home/inbox" exact component={Inbox}></Route>
+          <Route path="/home/inbox/:id" component={EmailDetail}></Route>
           <Route path="/home/starred" render={() => <h3>Inbox Starred</h3>}></Route>
           <Route path="/home/counter" exact component={Counter}></Route>
         </Switch>
