@@ -5,10 +5,7 @@ import ProgressBar from '../../UI/ProgressBar';
 import axios from '../../axios';
 
 
-interface IProps extends RouteComponentProps{
-
-}
-
+interface IProps extends RouteComponentProps{}
 
 interface IState {
   loading: boolean;
@@ -29,15 +26,12 @@ class Inbox extends Component <IProps> {
 
   componentDidMount() {
     
-
     axios.get('/api/posts')
       .then(response => this.setState({ loading: false, data: response.data, error: null }))
       .catch(error => this.setState({loading: false, data: null, error: error}))
 
     // Fetch data from backend
-    // const res = fetch('url')
-    // then ( data => console.log(data))
-    //.catch(error => concole.log(error))
+    
   }
 }
 
@@ -52,7 +46,6 @@ interface IpropsInboxView extends RouteComponentProps{
 class InboxView extends Component<IpropsInboxView>{
 
   mailSelectedHandler(id: string, userId: string) {
-    /* console.log('Selected Email', id); */
     this.props.history.push({pathname: `/home/inbox/${id}`, search: `?userId-${userId}`});
   }
 
@@ -92,14 +85,6 @@ class InboxView extends Component<IpropsInboxView>{
 }
 
 export default Inbox;
-
-
-
-
-/*
-  Use json place holder
-  install axios
-*/
 
 
 

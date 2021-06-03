@@ -38,15 +38,10 @@ class EmailDetail extends Component<IProps> {
     const parsed = queryString.parse(this.props.location.search);
     console.log('Email query params: ', parsed);
     
-
+    // Fetch data from backend
     axios.get(`/api/posts/${id}`)
       .then(response => this.setState({ loading: false, data: response.data, error: null }))
       .catch(error => this.setState({ loading: false, data: null, error: error }))
-
-    // Fetch data from backend
-    // const res = fetch('url')
-    // then ( data => console.log(data))
-    //.catch(error => concole.log(error))
   }
 }
 

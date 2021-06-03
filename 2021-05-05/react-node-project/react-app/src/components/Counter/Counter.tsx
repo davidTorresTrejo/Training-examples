@@ -13,15 +13,13 @@ interface IProps{
 
 class Counter extends React.Component<IProps>{
 
-    /* state = { counter: 0 }; */
 
+    /* Handle onclick events of Buttons */
     onIncrementHandler = () => {
-        /* this.setState({counter: this.state.counter + 1}); */
         this.props.incrementCounter(1);
     }
 
     onDecrementHandler = () => {
-        /* this.setState({counter: this.state.counter - 1}); */
         this.props.decrementCounter(1);
     }
 
@@ -36,8 +34,7 @@ class Counter extends React.Component<IProps>{
     }
 }
 
-/* Connect Redux */
-
+/* Subscribe to central store */
 const mapStateToProps = (store: any) => ({
     counter: store.counterKey.counter
 });

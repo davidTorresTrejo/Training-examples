@@ -81,11 +81,11 @@ const LayoutArea = (props: Props) => {
 
   const handleListItemClick = (event: any, index: number, path: string) => {
     setSelectedIndex(index);
-    props.history.push({pathname: path});
+    props.history.push({pathname: path});                 /* Insert path to url, come from list in HomePage. */
   }
 
   const drawer = (
-    /* Content Layout Home */
+    /* Content Layout (SibeBar) */
     /* Add list item dinamic, search components list in material ui */
 
     <div>
@@ -141,9 +141,7 @@ const LayoutArea = (props: Props) => {
           </Drawer>
         </Hidden>
       </nav>
-      {/* Check This  */}
       {<main className={classes.content}>
-        {/* <div className={classes.toolbar} /> */}
         <Typography paragraph>
           {props.children}
         </Typography>
@@ -154,30 +152,3 @@ const LayoutArea = (props: Props) => {
 
 
 export default withRouter(LayoutArea);
-
-
-
-/* Comments */
-
-/* 
-      Implement switch-case statement to choose path 
-      if statement is to fix the path
-    */
-
-      /* switch(index){
-        case 0:
-          if(props.history.location.pathname === '/' || props.history.location.pathname === '/home/starred'){
-            props.history.push({pathname: '/home/inbox'});
-          }else{
-            props.history.push({pathname: '/admin/user'});
-          }
-          return;
-  
-        case 1:
-          if(props.history.location.pathname === '/' || props.history.location.pathname === '/home/inbox'){
-            props.history.push({pathname: '/home/starred'});
-          }else{
-            props.history.push({pathname: '/admin/config'});
-          }
-          return;
-      } */

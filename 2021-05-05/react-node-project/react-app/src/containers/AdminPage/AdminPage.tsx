@@ -17,7 +17,7 @@ class AdminPage extends React.Component {
       <LayoutArea items={this.list} defaultSelected={-1}>
         <Switch>
           <Route path='/admin/user' exact render={() => <Users></Users>}></Route>
-          <Route path='/admin/roles' exact render={() => <h3>Config Component</h3>}></Route>
+          <Route path='/admin/roles' exact render={() => <h3>Roles Component</h3>}></Route>
         </Switch>
       </LayoutArea>
     );

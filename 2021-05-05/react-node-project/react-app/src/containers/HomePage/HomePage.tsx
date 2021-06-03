@@ -63,5 +63,3 @@ const mapStateToProps = (store: any) => ({
 });
 
 export default connect(mapStateToProps)(HomePage);
-/* export default HomePage; */
-/* Add Route  */

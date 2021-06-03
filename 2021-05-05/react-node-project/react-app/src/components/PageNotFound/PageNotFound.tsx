@@ -8,7 +8,6 @@ interface IProps {
 class PageNotFound extends React.Component<IProps>{
     render() {
         return (
-            /* Use Paper Material UI and icons */
             <Paper elevation={0}>
                 <h1>{this.props.title}</h1>
                 <p>The Current page is not available.....</p>

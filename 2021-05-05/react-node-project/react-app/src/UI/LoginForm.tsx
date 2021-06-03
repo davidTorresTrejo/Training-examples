@@ -57,24 +57,6 @@ export default function LoginForm(props: IProps) {
     [classes.buttonSuccess]: failure,
   });
 
-  /* useEffect(() => {
-    return () => {
-      clearTimeout(timer.current);
-    };
-  }, []);
-
-  const handleButtonClick = () => {
-    if (!loading) {
-      setFailure(false);
-      setLoading(true);
-      timer.current = window.setTimeout(() => {
-        setFailure(true);
-        setLoading(false);
-      }, 2000);
-    }
-  }; */
-
-
   /* Data */
   const [email, setEmail] = useState(``);
   const [password, setPassword] = useState(``);
@@ -89,7 +71,6 @@ export default function LoginForm(props: IProps) {
 
   const loginClickHandler = (event: any) => {
     props.loginHandler(email, password);
-    /* handleButtonClick(); */
     /* console.log(`email: ${email} , password: ${password}`); */
   }
 
@@ -99,7 +80,6 @@ export default function LoginForm(props: IProps) {
       <form noValidate autoComplete="off">
         <Input fullWidth placeholder="Email" inputProps={{ 'aria-label': 'description' }} onChange={emailChangeHandler}/> <br/><br/>
         <Input fullWidth placeholder="Password" inputProps={{ 'aria-label': 'description' }} onChange={passwordChangeHandler}/> <br/><br/>
-        {/* <Button variant="contained" color="primary" onClick={loginClickHandler}>Login</Button> */}
         <div className={classes.wrapper}>
           <Button fullWidth variant="contained" color="primary" className={buttonClassname} disabled={loading} onClick={loginClickHandler}>
             Login

@@ -9,7 +9,6 @@ import { authStartAction, authSuccessAction, authErrorAction } from '../../redux
 
 
 /* Class For Authentication */
-
 export class AuthUserValidation {
 
     @IsEmail({}, { message: `Email is invalid` })
@@ -135,7 +134,7 @@ class LoginView extends Component<Iprops>{
 
 }
 
-/* Redux */
+/* Subscribe to central store */
 const mapStateToProps = ( store: any ) => ({
     authenticating: store.auth.authenticating,
     isAuthenticated: store.auth.isAuthenticated,
@@ -144,4 +143,3 @@ const mapStateToProps = ( store: any ) => ({
 
 export default connect(mapStateToProps, { authStartAction, authSuccessAction, authErrorAction } ) (Login);
 
-/* export default Login; */

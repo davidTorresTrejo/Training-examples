@@ -27,7 +27,6 @@ class Users extends React.Component<IUserProps>{
 
   searchKeyPressHandler = (event: any) => {
     if (event.key === `Enter`){
-      /* console.log( `data: `, event.target.value); */
       const getOption = event.target.value;
       this.fetchUsers(`/api/users?name=${getOption}`);
     }
@@ -40,10 +39,8 @@ class Users extends React.Component<IUserProps>{
         const modUsers = users.map((user: any) => {
           return { User: user.name, Email: user.email, City: user.address.city, Phone: user.phone, Company: user.company.name };
         });
-        /* this.setState({ loading: false, data: modUsers, error: null }); */
         this.props.updateUsersAction(modUsers);
       })
-      /* .catch(error => this.setState({ loading: false, data: null, error: error })); */
       .catch(error => this.props.updateErrorAction(error));
   }
 

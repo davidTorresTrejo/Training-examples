@@ -1,4 +1,3 @@
-/* Add Simple Nav Bar */
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -35,7 +34,6 @@ const Bar = ( props:  IProps ) => {
 
 
   /* Handling onClick proparty of Buttons Home, Admin & Login */
-
   const appButtomHandler = () => {
     props.history.push({ pathname: '/' });
   }
@@ -51,6 +49,8 @@ const Bar = ( props:  IProps ) => {
   const loginButtomHandler = () => {
     props.history.push({ pathname: '/login' });
   }
+
+  /* Handling Auth Action for Logout */
   const logoutButtomHandler = () => {
     props.authLogoutAction();
   }
@@ -62,27 +62,25 @@ const Bar = ( props:  IProps ) => {
           <Typography variant="h6" className={classes.title}>
             <Button color="inherit" onClick={appButtomHandler}>MyAplication</Button>
           </Typography>
-          {/* Routes to Home and Admin Pages in Buttons */}
+          
           <Button color="inherit" onClick={homeButtomHandler}>Home</Button>
+          {/* If user is Authenticated show Admin button  */}
           { props.isAuthenticated ? <Button color="inherit" onClick={adminButtomHandler}>Admin</Button> : <p></p> }
 
+          {/* If user is Authenticated show Logout else show Login */}
           { props.isAuthenticated ? <Button color="inherit" onClick={logoutButtomHandler}>Logout</Button>
             : <Button color="inherit" onClick={loginButtomHandler}>Login</Button>
           }
-
         </Toolbar>
       </AppBar>
     </div>
   );
 }
 
+/* Subscribe to central store */
 const mapStateToProps = ( store: any ) => ({
   isAuthenticated: store.auth.isAuthenticated
 });
 
-/* export default withRouter(MyAppBar); */
-export default connect(mapStateToProps, { authLogoutAction }) (withRouter(Bar));
 
-/*  Import withRouter export withRoute(MyAppBar)
-    onClick
-*/
+export default connect(mapStateToProps, { authLogoutAction }) (withRouter(Bar));

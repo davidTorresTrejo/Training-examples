@@ -17,12 +17,11 @@ class App extends React.Component<IProps>{
 
     let routes = (
       <Switch>
-          <Route path="/" exact component={HomePage}></Route>
-          <Route path="/home" component={HomePage}></Route>
-          {/* <Route path="/admin" component={AdminPage}></Route> */}
-          <Route path="/login" component={LoginPage}></Route>
-          <Route render={() => <PageNotFound title="Page Not Found...." />} />
-        </Switch>
+        <Route path="/" exact component={HomePage}></Route>
+        <Route path="/home" component={HomePage}></Route>
+        <Route path="/login" component={LoginPage}></Route>
+        <Route render={() => <PageNotFound title="Page Not Found...." />} />        {/* Default Case */}
+      </Switch>
     );
 
     if (this.props.isAuthenticated) {
@@ -30,7 +29,7 @@ class App extends React.Component<IProps>{
         <Switch>
           <Route path="/" exact component={HomePage}></Route>
           <Route path="/home" component={HomePage}></Route>
-          <Route path="/admin" component={AdminPage}></Route>
+          <Route path="/admin" component={AdminPage}></Route>                       {/* If user is auth, AdminPage is enable */}
           <Route path="/login" component={LoginPage}></Route>
           <Route render={() => <PageNotFound title="Page Not Found...." />} />
         </Switch>
@@ -53,6 +52,3 @@ const mapStateToProps = (store: any) => ({
 });
 
 export default connect(mapStateToProps)(App);
-/* export default App; */
-/* Add switch and route */
-/* Install Axios  */

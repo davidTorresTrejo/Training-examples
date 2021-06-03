@@ -5,8 +5,6 @@ import Login from '../../components/Login/Login';
 /* LoginPage Component */
 class LoginPage extends Component {
 
-  /* I need to create another layout specific for logging purpose */
-
   render() {
     return (
       <LayoutLogin>
