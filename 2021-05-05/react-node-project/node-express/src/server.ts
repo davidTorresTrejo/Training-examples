@@ -38,7 +38,6 @@ class Server {
 
 
     /*  Middleware -  Methods  */
-
     private registerMiddleware() {
         registerCommonMiddleware(this.server);
         registerLoggingMiddlewar(this.server);
@@ -50,7 +49,6 @@ class Server {
     }
 
     private registerErrorHandling() {
-        
         registerUnhandledRoutesMiddleware(this.server);
         registerErrorHandlingMiddleware(this.server);
     }

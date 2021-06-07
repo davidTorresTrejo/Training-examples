@@ -13,7 +13,7 @@ const Card = (props) => {
 
 // Class Components
 class Cart extends React.Component{
-    // Class needs overwrite reder function
+    // Class needs overwrite reder method
     render(){
         return(
             <div class = "box">

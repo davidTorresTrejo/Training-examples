@@ -23,11 +23,11 @@ var Color;
 var myColor = Color.Red;
 /* Functions */
 function sayHello(name) {
-    return "Hello $(name)";
+    return "Hello " + name;
 }
 var resulName = sayHello('David');
 function print() {
-    console.log('Printing....');
+    console.log(resulName);
 }
 print();
 function multiply(num1, num2) {
@@ -36,7 +36,7 @@ function multiply(num1, num2) {
 console.log(multiply(12, 13));
 // Function Type
 function printMe(data) {
-    return "Hello $(data)";
+    return "Hello " + data;
 }
 var greetings;
 greetings = printMe;

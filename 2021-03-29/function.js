@@ -30,9 +30,9 @@ var multiplyNumbers = function (num1, num2) {
     if (num2 === void 0) { num2 = 3; }
     return num1 * num2;
 };
-multiplyNumbers(2);
+console.log(multiplyNumbers(2));
 var multiplyNumbers2 = function (num1, num2) { return num1 * num2; };
-multiplyNumbers2(2, 3);
+console.log(multiplyNumbers2(2, 3));
 /* Spread Operator (Arrays & Objects) */
 var numbers = [2, 4, 6, 8];
 var numbersDup = __spreadArray([], numbers); //Duplication of data

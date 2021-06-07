@@ -28,12 +28,12 @@ let myColor: Color = Color.Red;
 
 /* Functions */
 function sayHello(name: string){
-    return `Hello $(name)`;
+    return `Hello ${name}`;
 }
 let resulName: string = sayHello('David');
 
 function print(): void{
-    console.log('Printing....');
+    console.log(resulName);
 }
 print();
 
@@ -44,7 +44,7 @@ console.log(multiply(12, 13));
  
 // Function Type
 function printMe(data: string){
-    return `Hello $(data)`;
+    return `Hello ${data}`;
 }
  let greetings : (a: string) => string;
  greetings = printMe;
@@ -53,7 +53,7 @@ function printMe(data: string){
 
 
  /* Objects */
- type Complex = {name: string, age: number, hobbies: string[], print: (data: string) => void};
+type Complex = {name: string, age: number, hobbies: string[], print: (data: string) => void};
 let user: Complex = {
     name: 'David',
     age: 23,

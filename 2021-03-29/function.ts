@@ -16,10 +16,10 @@ addNumbers(2,45);
 let multiplyNumbers = (num1: number, num2: number = 3): number =>{
     return num1 * num2;
 }
-multiplyNumbers(2);
+console.log(multiplyNumbers(2));
 
 let multiplyNumbers2 = (num1: number, num2: number): number => num1 * num2;
-multiplyNumbers2(2,3);
+console.log(multiplyNumbers2(2,3));
 
 
 /* Spread Operator (Arrays & Objects) */
